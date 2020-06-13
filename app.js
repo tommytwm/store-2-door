@@ -1,7 +1,11 @@
 var express = require('express');
 var app = express();
-var routes = require('./src/routes');
 
+const bodyParser = require("body-parser");
+const routes = require('./src/routes');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(routes);
 
 app.listen(3000, function() {
