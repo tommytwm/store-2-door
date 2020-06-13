@@ -4,6 +4,7 @@ A final project for CPSC 304 - Introduction to Relational Databases, Summer 2020
 ## Getting Started
 
 ### Dependencies
+- [MYSQL Community Edition 8.x.xx](https://www.mysql.com/products/community/)
 - NodeJS v12.xx.x
 - NPM v6.xx.x
 
