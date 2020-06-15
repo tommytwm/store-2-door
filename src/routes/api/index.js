@@ -1,6 +1,6 @@
 var router = require('express').Router();
-var example = require('./example');
+var acceptRequest = require('./acceptRequest');
 
-router.use('/example', example);
+router.use('/acceptRequest', acceptRequest);
 
 module.exports = router;
