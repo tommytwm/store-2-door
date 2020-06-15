@@ -14,3 +14,7 @@ A final project for CPSC 304 - Introduction to Relational Databases, Summer 2020
 3. Run the following script on your Terminal: `npm install`. It should install node modules as well as express.
 4. Run the app by entering `node app.js`. You should see some logs printed on your terminal.
 5. Launch your local host in your browser of choice. For exmaple, `http://localhost:3000/`. This is webpage of your app.
+
+### Adding to DB manually:
+We are using Heroku as our hosting service to store and manage our database via MYSQL. To manually connect and contribute to the database, connect to the MYSQL server (credentials can be found in the config file(s)): `mysql --host={HOSTNAME} --user={USERNAME} --password={PASSWORD} --reconnect {DB}`
+You should now be able to enter SQL commands and contribute to the database.
