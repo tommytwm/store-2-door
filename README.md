@@ -8,12 +8,18 @@ A final project for CPSC 304 - Introduction to Relational Databases, Summer 2020
 - NodeJS v12.xx.x
 - NPM v6.xx.x
 
-### How to run
+### Setting up
 1. Clone the repository onto your desktop. You can do this by launching **Terminal** and entering `git clone https://github.com/tommytwm/store-2-door.git`
 2. Launch terminal and make sure the root is at the repository. You can do this by entering `cd store-2-door` on Terminal.
-3. Run the following script on your Terminal: `npm install`. It should install node modules as well as express.
-4. Run the app by entering `node app.js`. You should see some logs printed on your terminal.
-5. Launch your local host in your browser of choice. For exmaple, `http://localhost:3000/`. This is webpage of your app.
+3. Run the following script on your Terminal: `npm install`. It should install all node dependencies.
+
+### How to run (API)
+1. Run the app by entering `node app.js`. You should see some logs printed on your terminal.
+2. Launch your local host in your browser of choice. For exmaple, `http://localhost:3000/`
+
+### How to run (Web-app)
+1. Run the app by entering `npm run dev`. You should see some logs printed on your terminal.
+2. Launch your local host in your browser of choice. For exmaple, `http://localhost:3000/`. This is webpage of your app.
 
 ### Adding to DB manually:
 We are using Heroku as our hosting service to store and manage our database via MYSQL. To manually connect and contribute to the database, connect to the MYSQL server (credentials can be found in the config file(s)): `mysql --host={HOSTNAME} --user={USERNAME} --password={PASSWORD} --reconnect {DB}`
