@@ -10,6 +10,12 @@ app.use(routes);
 
 
 
-const port = 5000;
 
-app.listen(port, () => `Server running on port ${port}`);
+//const port = 5000;
+
+//app.listen(port, () => `Server running on port ${port}`);
+
+var server = app.listen(process.env.PORT || 5000, function() {
+    console.log('Server listening on port ' + server.address().port);
+});
+
