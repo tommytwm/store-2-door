@@ -18,8 +18,17 @@ exports.add_user = function(req, res) {
 });
 }
 
+exports.delete_user = function(req, res) {
+  User.addUser(req.params.uid, function(err, user) {
+    if (err)
+      res.send(err);
+    res.json(user);
+});
+}
+
+
 exports.get_user_by_id = function (req, res) {
-    User.getUserById(req.params.userId, function(err, user) {
+    User.getUserById(req.params.uid, function(err, user) {
         if (err)
           res.send(err);
         res.json(user);

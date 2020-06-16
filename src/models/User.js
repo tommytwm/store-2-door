@@ -32,6 +32,24 @@ User.addUser = function(name, email, geoLocId, result) {
     );
 }
 
+User.deleteUser = function(userId, result) {
+    sql.query(
+        {
+            sql: "DELETE FROM user WHERE uid = ?",
+            values: [userId] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+};
+
 User.getUserById = function(userId, result) {
     sql.query(
         {
