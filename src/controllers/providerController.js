@@ -11,7 +11,7 @@ exports.create_provider = function(req, res) {
 };
 
 exports.get_provider_by_id = function (req, res) {
-  Provider.getProviderById(req.params.providerId, function(err, provider) {
+  Provider.getProviderById(req.params.uid, function(err, provider) {
       if (err)
         res.send(err);
       res.json(provider);

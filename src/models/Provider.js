@@ -13,10 +13,10 @@ Provider.createProvider = function(newProvider, result) {
     createModel("provider", newProvider, result);
 };
 
-Provider.getProviderById = function(providerId, result) {
+Provider.getProviderById = function(uid, result) {
     sql.query(
         {
-            sql: "SELECT * FROM provider WHERE uid = ?",
+            sql: "SELECT u.name, u.email, u.geoLocId, p.numDeliveries FROM provider WHERE uid = ?",
             values: [providerId] 
         },
         function (err, res) {             
