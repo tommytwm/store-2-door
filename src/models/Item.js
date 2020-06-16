@@ -70,6 +70,24 @@ Item.getItemsByStoreId = function (storeId, result) {
     );
 };
 
+Item.getItemsBySupplierId = function (supplierId, result) {
+    sql.query(
+        {
+            sql: "SELECT * FROM item WHERE supplierId = ?",
+            values: [supplierId]
+        },
+        function (err, res) {
+            if (err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else {
+                result(null, res);
+            }
+        }
+    );
+};
+
 Item.getItemsBelowPrice = function (price, result) {
     sql.query(
         {

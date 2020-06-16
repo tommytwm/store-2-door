@@ -34,6 +34,14 @@ exports.get_items_by_store_id = function (req, res) {
     });
 };
 
+exports.get_items_by_supplier_id = function (req, res) {
+    Item.getItemsByStoreId(req.params.supplier, function (err, item) {
+        if (err)
+            res.send(err);
+        res.json(item);
+    });
+};
+
 exports.get_items_below_price = function (req, res) {
     Item.getItemByStoreId(req.body.price, function (err, item) {
         if (err)
