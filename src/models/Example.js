@@ -32,16 +32,30 @@ Example.getExampleById = function(exampleId, result) {
 };
 
 Example.getAllExamples = function(result) {
-    sql.query("SELECT * from examples", function (err, res) {             
+    sql.query("SELECT * from heroku_622e1f339f8e277.admin", function (err, res) {             
         if(err) {
             console.log("error: ", err);
             result(err, null);
         }
-        else{
+        else {
+            console.log(JSON.stringify(res)+"got it")
             result(null, res);
       
         }
     });   
+};
+Example.getAllUsers = function (result) {
+    sql.query("SELECT * from heroku_622e1f339f8e277.user", function (err, res) {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+        else {
+            console.log(JSON.stringify(res) + "got it")
+            result(null, res);
+
+        }
+    });
 };
 
 module.exports = Example;

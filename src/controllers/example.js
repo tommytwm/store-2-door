@@ -25,3 +25,12 @@ exports.get_all_examples = function(req, res) {
         res.json(examples);
     });
 };
+
+exports.get_all_users = function (req, res) {
+    Example.getAllUsers(function (err, examples) {
+        if (err)
+            res.send(err);
+        console.log("Get users")
+        res.json(examples);
+    });
+};
