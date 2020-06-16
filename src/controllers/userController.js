@@ -26,6 +26,14 @@ exports.get_user_by_id = function (req, res) {
     });
 };
 
+exports.get_users_with_reviews = function (req, res) {
+  User.getUsersWithReviews(function(err, user) {
+      if (err)
+        res.send(err);
+      res.json(user);
+  });
+};
+
 exports.get_all_users = function (req, res) {
     User.getAllUsers(function(err, user) {
         if (err)
