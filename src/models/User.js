@@ -32,11 +32,11 @@ User.addUser = function(name, email, geoLocId, result) {
     );
 }
 
-User.deleteUser = function(userId, result) {
+User.deleteUser = function(uid, result) {
     sql.query(
         {
             sql: "DELETE FROM user WHERE uid = ?",
-            values: [userId] 
+            values: [uid] 
         },
         function (err, res) {             
             if(err) {
@@ -50,11 +50,11 @@ User.deleteUser = function(userId, result) {
     );
 };
 
-User.getUserById = function(userId, result) {
+User.getUserById = function(uid, result) {
     sql.query(
         {
             sql: "SELECT * FROM user WHERE uid = ?",
-            values: [userId] 
+            values: [uid] 
         },
         function (err, res) {             
             if(err) {

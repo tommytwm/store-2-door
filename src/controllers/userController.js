@@ -26,7 +26,6 @@ exports.delete_user = function(req, res) {
 });
 }
 
-
 exports.get_user_by_id = function (req, res) {
     User.getUserById(req.params.uid, function(err, user) {
         if (err)
