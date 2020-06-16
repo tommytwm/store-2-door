@@ -50,6 +50,24 @@ User.deleteUser = function(uid, result) {
     );
 };
 
+User.editUser = function(uid, name, email, geoLocId, result) {
+    sql.query(
+        {
+            sql: "UPDATE user SET name = ?, email = ?, geoLocId = ? WHERE uid = ?",
+            values: [name, email, geoLocId, uid] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+};
+
 User.getUserById = function(uid, result) {
     sql.query(
         {
