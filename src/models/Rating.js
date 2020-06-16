@@ -32,7 +32,7 @@ Rating.getRatingById = function(ratingId, result) {
     );
 };
 
-Rating.getUsersByRating = function(minRating, result) {
+Rating.getUsersWithRating = function(minRating, result) {
     sql.query(
         {
             sql: "SELECT uid FROM rating WHERE ratingId >= ?",
