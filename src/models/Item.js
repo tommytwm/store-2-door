@@ -37,7 +37,7 @@ Item.getItemById = function(itemId, result) {
 Item.getItemByStoreId = function (storeId, result) {
     sql.query(
         {
-            sql: "SELECT * FROM item WHERE itemId = ?",
+            sql: "SELECT * FROM item WHERE storeId = ?",
             values: [storeId]
         },
         function (err, res) {
