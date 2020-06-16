@@ -36,4 +36,23 @@ User.getAllUsers = function(result) {
     getAllModels("user", result);
 };
 
+User.loginUser = function(name, email, result) {
+    sql.query(
+        {
+            sql: "SELECT * FROM user WHERE (name = ? AND email = ?)",
+            values: [name, email]
+        },
+        function (err, res) {
+            console.log(res);
+            if (err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else {
+                result(null, res);
+            }
+        }
+    )
+}
+
 module.exports = User;

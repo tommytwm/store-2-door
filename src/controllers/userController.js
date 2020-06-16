@@ -25,3 +25,11 @@ exports.get_all_users = function (req, res) {
         res.json(user);
     });
 };
+
+exports.login_user = function (req, res) {
+  User.loginUser(req.body.name, req.body.email, function(err, user) {
+      if (err)
+        res.send(err);
+      res.json(user);
+  });
+};
