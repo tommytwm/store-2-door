@@ -32,6 +32,24 @@ Rating.getRatingById = function(ratingId, result) {
     );
 };
 
+Rating.getUsersByRating = function(minRating, result) {
+    sql.query(
+        {
+            sql: "SELECT uid FROM rating WHERE ratingId >= ?",
+            values: [minRating]
+        },
+        function (err, res) {
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+}
+
 Rating.getAllRatings = function(result) {
     getAllModels("rating", result);
 };
