@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Layout, Header, Navigation, Drawer, Content } from 'react-mdl';
+import { Footer, FooterSection, FooterLinkList, Layout, Header, Navigation, Drawer, Content } from 'react-mdl';
 import Main from './components/main';
 import 'react-mdl/extra/material.css';
 import 'react-mdl/extra/material.js';
@@ -8,14 +8,11 @@ import { Link } from 'react-router-dom';
 
 
 class App extends Component {
-    state = { user: '' }
 
-    handleUser = (userVal) => {
-        this.setState({ user: userVal });
-    }
+
+
 
 render() {
-    console.log("here")
         return (
             <div className="demo-big-content">
                 <Layout>
@@ -33,6 +30,7 @@ render() {
                         <Navigation>
                             <Link style={{ color: '#2F2B0E', fontSize: '1.35em' }} to={process.env.PUBLIC_URL + "/"}>Home</Link>
                             <Link style={{ color: '#2F2B0E', fontSize: '1.35em' }} to={process.env.PUBLIC_URL + "/shop"}>Shop</Link>
+
                             <Link style={{ color: '#2F2B0E', fontSize: '1.35em' }} to={process.env.PUBLIC_URL + "/signin"}>Sign In</Link>
                         </Navigation>
                     </Header>
@@ -45,8 +43,17 @@ render() {
                     </Drawer>
                     <Content>
                         <div className="page-content" />
+  
                         <Main/>
                     </Content>
+                    <Footer className="header-color" size="mini">
+                        <FooterSection type="left" logo="Store 2 Door">
+                            <FooterLinkList style={{color:'black'}}>
+                                <a href="#">Help</a>
+                                <a href="#">Privacy & Terms</a>
+                            </FooterLinkList>
+                        </FooterSection>
+                    </Footer>
                 </Layout>
             </div>
 

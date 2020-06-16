@@ -39,7 +39,7 @@ class Providers extends Component { // props: pId
                         Trips:
                         {this.state.trips.map(function (t) {
                         return (
-                            <Link key={t.uid} to={{ pathname: '/items', state: { storeId: t.storeId } }}>{t.storeId}</Link> 
+                            <Link key={t.uid} to={{ pathname: '/items', state: { storeId: t.storeId, providerId: this.state.pId } }}>{t.storeId}</Link> 
                         )
                     }, this)}
 

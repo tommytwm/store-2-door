@@ -60,10 +60,10 @@ class Shop extends Component {
                         <h3>Available Stores</h3>
                         <Grid className="demo-grid-3">
 
-                            {this.state.stores.map(function (s) {
+                            {this.state.stores.map(function (s, i) {
                                 return (
                                     <Cell className= "mdl-cell--4-col" col={4}>
-                                        <Link key={s.storeId} to={{ pathname: '/items', state: { storeId: s.storeId } }}>{s.name}</Link> 
+                                        <Link key={i} to={{ pathname: '/items', state: { storeId: s.storeId } }}>{s.name}</Link> 
                                     </Cell>
                                 )
                             }, this)}
