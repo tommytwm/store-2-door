@@ -16,6 +16,24 @@ Item.createItem = function(newItem, result) {
     createModel("item", newItem, result);
 };
 
+Item.addItem = function(name, price, maxOrder, supplierId, storeId, result) {
+    sql.query(
+        {
+            sql: "INSERT INTO item(name, price, maxOrder, supplierId, storeId) VALUES (name = ?, price = ?, maxOrder = ?, supplierId = ?, storeId = ?)",
+            values: [name, price, maxOrder, supplierId, storeId] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+};
+
 Item.getItemById = function(itemId, result) {
     sql.query(
         {
