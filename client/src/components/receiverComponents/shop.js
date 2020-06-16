@@ -65,7 +65,7 @@ class Shop extends Component {
                         }, this)}
 
                         </div>
-                        <Link to='/items'>Click Me</Link>
+                        
 
                     </Cell>
                 </Grid>

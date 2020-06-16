@@ -6,12 +6,7 @@ import Deliver from './providerComponents/deliver';
 import Items from './receiverComponents/items';
 import Providers from './receiverComponents/providers';
 
-// these are routers i.e. in python, @app.route("/")
-//                                      def home():
-// where the route when typed into URL is what is displayed
-// uses route from react dom
 
-//  <Route path="/projects" component={Projects} />
 const Main = () => (
     <Switch>
         <Route exact path="/" component={LandingPage}/>
