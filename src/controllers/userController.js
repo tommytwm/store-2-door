@@ -11,7 +11,7 @@ exports.create_user = function(req, res) {
 };
 
 exports.add_user = function(req, res) {
-  User.addUser(req.params.name, req.params.email, req.params.geoLocId, function(err, user) {
+  User.addUser(req.body.name, req.body.email, req.params.geoLocId, function(err, user) {
     if (err)
       res.send(err);
     res.json(user);
@@ -27,7 +27,7 @@ exports.delete_user = function(req, res) {
 };
 
 exports.edit_user = function(req, res) {
-  User.editUser(req.params.uid, req.params.name, req.params.email, req.params.geoLocId, function(err, user) {
+  User.editUser(req.params.uid, req.body.name, req.body.email, req.params.geoLocId, function(err, user) {
     if (err)
       res.send(err);
     res.json(user);
