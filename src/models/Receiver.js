@@ -15,7 +15,25 @@ Receiver.createReceiver = function(newReceiver, result) {
 Receiver.getReceiverById = function(receiverId, result) {
     sql.query(
         {
-            sql: "SELECT * FROM receiver WHERE uid = ?",
+            sql: "SELECT u.name, u.email, u.geoLocId, r.numOrders FROM user u, receiver r WHERE uid = ?",
+            values: [receiverId] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+};
+
+Receiver.getAllReceiverProfiles = function(result) {
+    sql.query(
+        {
+            sql: "SELECT u.name, u.email, u.geoLocId, r.numOrders FROM user u, receiver r WHERE r.uid = u.uid",
             values: [receiverId] 
         },
         function (err, res) {             

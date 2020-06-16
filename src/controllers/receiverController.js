@@ -18,6 +18,14 @@ exports.get_receiver_by_id = function (req, res) {
     });
 };
 
+exports.get_all_receiver_profiles = function (req, res) {
+  Receiver.getAllReceiverProfiles(function(err, receiver) {
+      if (err)
+        res.send(err);
+      res.json(receiver);
+  });
+};
+
 exports.get_all_receivers = function (req, res) {
     Receiver.getAllReceivers(function(err, receiver) {
         if (err)
