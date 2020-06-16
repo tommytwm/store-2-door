@@ -14,6 +14,24 @@ User.createUser = function(newUser, result) {
     createModel("user", newUser, result);
 };
 
+User.addUser = function(name, email, geoLocId, result) {
+    sql.query(
+        {
+            sql: "INSERT INTO User(name, email, geoLocId) VALUES(name = ?, email = ?, geoLocId = ?)",
+            values: [name, email, geoLocId] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+}
+
 User.getUserById = function(userId, result) {
     sql.query(
         {
@@ -31,6 +49,43 @@ User.getUserById = function(userId, result) {
         }
     );
 };
+
+User.getUserByName = function(name, result) {
+    sql.query(
+        {
+            sql: "SELECT * FROM user WHERE name = ?",
+            values: [name] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+}
+
+User.getUsersWithReviews = function(result) {
+    sql.query(
+        {
+            sql: " SELECT uid FROM Users u, Review r WHERE 
+            
+            ",
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+}
 
 User.getAllUsers = function(result) {
     getAllModels("user", result);
