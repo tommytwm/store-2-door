@@ -31,6 +31,23 @@ Provider.getProviderById = function(providerId, result) {
     );
 };
 
+Provider.getAllProviderProfiles = function(result) {
+    sql.query(
+        {
+            sql: "SELECT u.name, u.email, u.geoLocId FROM user u, provider p WHERE p.uid = u.uid",
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+}
+
 Provider.getAllProviders = function(result) {
     getAllModels("provider", result);
 };
