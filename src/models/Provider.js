@@ -34,7 +34,7 @@ Provider.getProviderById = function(providerId, result) {
 Provider.getAllProviderProfiles = function(result) {
     sql.query(
         {
-            sql: "SELECT u.name, u.email, u.geoLocId FROM user u, provider p WHERE p.uid = u.uid",
+            sql: "SELECT u.name, u.email, u.geoLocId, p.numDeliveries FROM user u, provider p WHERE p.uid = u.uid",
         },
         function (err, res) {             
             if(err) {
