@@ -1,6 +1,6 @@
+var sql = require('../controllers/databaseController');
 const QueryUtils = require('../utils/QueryUtils');
 const createModel = QueryUtils.createModel;
-const getModelById = QueryUtils.getModelById;
 const getAllModels = QueryUtils.getAllModels;
 
 var Item = function(item) {
@@ -17,7 +17,21 @@ Item.createItem = function(newItem, result) {
 };
 
 Item.getItemById = function(itemId, result) {
-    getModelById("item", itemId, result);
+    sql.query(
+        {
+            sql: "SELECT * FROM item WHERE itemId = ?",
+            values: [itemId] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
 };
 
 Item.getAllItems = function(result) {

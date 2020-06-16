@@ -11,7 +11,7 @@ exports.create_accept_request = function(req, res) {
 };
 
 exports.get_accept_request_by_id = function (req, res) {
-    AcceptRequest.getAcceptRequestById(req.params.acceptRequestId, function(err, acceptRequest) {
+    AcceptRequest.getAcceptRequestById(req.params.requestId, req.params.providerId, function(err, acceptRequest) {
         if (err)
           res.send(err);
         res.json(acceptRequest);

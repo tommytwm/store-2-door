@@ -1,6 +1,6 @@
+var sql = require('../controllers/databaseController');
 const QueryUtils = require('../utils/QueryUtils');
 const createModel = QueryUtils.createModel;
-const getModelById = QueryUtils.getModelById;
 const getAllModels = QueryUtils.getAllModels;
 
 var Receiver = function(receiver) {
@@ -13,7 +13,21 @@ Receiver.createReceiver = function(newReceiver, result) {
 };
 
 Receiver.getReceiverById = function(receiverId, result) {
-    getModelById("receiver", receiverId, result);
+    sql.query(
+        {
+            sql: "SELECT * FROM receiver WHERE uid = ?",
+            values: [receiverId] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
 };
 
 Receiver.getAllReceivers = function(result) {

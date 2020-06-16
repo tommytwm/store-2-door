@@ -1,6 +1,6 @@
+var sql = require('../controllers/databaseController');
 const QueryUtils = require('../utils/QueryUtils');
 const createModel = QueryUtils.createModel;
-const getModelById = QueryUtils.getModelById;
 const getAllModels = QueryUtils.getAllModels;
 
 var Supplier = function(supplier) {
@@ -14,7 +14,21 @@ Supplier.createSupplier = function(newSupplier, result) {
 };
 
 Supplier.getSupplierById = function(supplierId, result) {
-    getModelById("supplier", supplierId, result);
+    sql.query(
+        {
+            sql: "SELECT * FROM supplier WHERE supplierId = ?",
+            values: [supplierId] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
 };
 
 Supplier.getAllSuppliers = function(result) {

@@ -1,6 +1,6 @@
+var sql = require('../controllers/databaseController');
 const QueryUtils = require('../utils/QueryUtils');
 const createModel = QueryUtils.createModel;
-const getModelById = QueryUtils.getModelById;
 const getAllModels = QueryUtils.getAllModels;
 
 var User = function(user) {
@@ -15,7 +15,21 @@ User.createUser = function(newUser, result) {
 };
 
 User.getUserById = function(userId, result) {
-    getModelById("user", userId, result);
+    sql.query(
+        {
+            sql: "SELECT * FROM user WHERE uid = ?",
+            values: [userId] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
 };
 
 User.getAllUsers = function(result) {

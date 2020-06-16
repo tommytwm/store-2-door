@@ -11,7 +11,7 @@ exports.create_provider_goes_to = function(req, res) {
 };
 
 exports.get_provider_goes_to_by_id = function (req, res) {
-    ProviderGoesTo.getProviderGoesToById(req.params.providerGoesToId, function(err, providerGoesTo) {
+    ProviderGoesTo.getProviderGoesToById(req.params.uid, req.params.storeId, function(err, providerGoesTo) {
         if (err)
           res.send(err);
         res.json(providerGoesTo);

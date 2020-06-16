@@ -1,6 +1,6 @@
+var sql = require('../controllers/databaseController');
 const QueryUtils = require('../utils/QueryUtils');
 const createModel = QueryUtils.createModel;
-const getModelById = QueryUtils.getModelById;
 const getAllModels = QueryUtils.getAllModels;
 
 var Admin = function(admin) {
@@ -13,7 +13,21 @@ Admin.createAdmin = function(newAdmin, result) {
 };
 
 Admin.getAdminById = function(adminId, result) {
-    getModelById("admin", adminId, result);
+    sql.query(
+        {
+            sql: "SELECT * FROM admin WHERE adminId = ?",
+            values: [adminId] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    ); 
 };
 
 Admin.getAllAdmins = function(result) {

@@ -1,6 +1,6 @@
+var sql = require('../controllers/databaseController');
 const QueryUtils = require('../utils/QueryUtils');
 const createModel = QueryUtils.createModel;
-const getModelById = QueryUtils.getModelById;
 const getAllModels = QueryUtils.getAllModels;
 
 var AcceptRequest = function(acceptRequest) {
@@ -13,8 +13,22 @@ AcceptRequest.createAcceptRequest = function(newAcceptRequest, result) {
     createModel("acceptrequest", newAcceptRequest, result);
 };
 
-AcceptRequest.getAcceptRequestById = function(acceptRequestId, result) {
-    getModelById("acceptrequest", acceptRequestId, result);
+AcceptRequest.getAcceptRequestById = function(requestId, providerId, result) {
+    sql.query(
+        {
+            sql: "SELECT * FROM acceptrequest WHERE (requestId = ? AND providerId = ?)",
+            values: [requestId, providerId] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
 };
 
 AcceptRequest.getAllAcceptRequests = function(result) {

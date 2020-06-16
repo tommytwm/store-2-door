@@ -1,6 +1,6 @@
+var sql = require('../controllers/databaseController');
 const QueryUtils = require('../utils/QueryUtils');
 const createModel = QueryUtils.createModel;
-const getModelById = QueryUtils.getModelById;
 const getAllModels = QueryUtils.getAllModels;
 
 var Rating = function(rating) {
@@ -15,7 +15,21 @@ Rating.createRating = function(newRating, result) {
 };
 
 Rating.getRatingById = function(ratingId, result) {
-    getModelById("rating", ratingId, result);
+    sql.query(
+        {
+            sql: "SELECT * FROM rating WHERE ratingId = ?",
+            values: [ratingId] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
 };
 
 Rating.getAllRatings = function(result) {

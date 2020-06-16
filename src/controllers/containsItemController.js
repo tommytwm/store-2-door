@@ -11,7 +11,7 @@ exports.create_contains_item = function(req, res) {
 };
 
 exports.get_contains_item_by_id = function (req, res) {
-    ContainsItem.getContainsItemById(req.params.containsItemId, function(err, containsItem) {
+    ContainsItem.getContainsItemById(req.params.requestId, req.params.itemId, function(err, containsItem) {
         if (err)
           res.send(err);
         res.json(containsItem);
