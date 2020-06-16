@@ -30,6 +30,25 @@ ProviderGoesTo.getProviderGoesToById = function(uid, storeId, result) {
     );
 };
 
+
+ProviderGoesTo.getProviderGoesToByPId = function (uid, result) {
+    sql.query(
+        {
+            sql: "SELECT * FROM providergoesto WHERE (uid = ?)",
+            values: [uid]
+        },
+        function (err, res) {
+            if (err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else {
+                result(null, res);
+            }
+        }
+    );
+};
+
 ProviderGoesTo.getAllProviderGoesTos = function(result) {
     getAllModels("providergoesto", result);
 };

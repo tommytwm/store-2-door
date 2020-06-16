@@ -9,6 +9,7 @@ class Landing extends Component {
     
     render() {
         return (
+
             <div style={{ width: '100%', margin: 'auto' }}>
                 <Grid className="mdl-grid--no-spacing landing-grid">
                     <Cell className="mdl-grid--no-spacing"col={12} style={{ margin: 'auto', marginTop: '10em', width: '90%', position: 'center' }}>

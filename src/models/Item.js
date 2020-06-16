@@ -34,6 +34,24 @@ Item.getItemById = function(itemId, result) {
     );
 };
 
+Item.getItemByStoreId = function (storeId, result) {
+    sql.query(
+        {
+            sql: "SELECT * FROM item WHERE itemId = ?",
+            values: [storeId]
+        },
+        function (err, res) {
+            if (err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else {
+                result(null, res);
+            }
+        }
+    );
+};
+
 Item.getAllItems = function(result) {
     getAllModels("item", result);
 };

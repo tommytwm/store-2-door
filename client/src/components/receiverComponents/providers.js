@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 class Providers extends Component { // props: pId
     constructor(props) {
         super(props);
-        console.log(props.location.state.pId)
         this.state = {
             pId: props.location.state.pId,
             trips: []
@@ -15,7 +14,7 @@ class Providers extends Component { // props: pId
     }
 
     componentDidMount() {
-        fetch('/api/example')// change this
+        fetch('/api/providerGoesTo/'+this.state.pId)// change this
             .then(res => res.json()) 
             .then(trips => this.setState({ trips }, () => console.log('trips fetched...', trips)));
     }
@@ -38,9 +37,9 @@ class Providers extends Component { // props: pId
                 <Cell col={12}>
                     <div>
                         Trips:
-                        {this.state.trips.map(function (s) {
+                        {this.state.trips.map(function (t) {
                         return (
-                            <Link key={s.uid} to={{ pathname: '/items', state: { storeId: s.uid } }}>{s.name}</Link> // TODO: change to stores
+                            <Link key={t.uid} to={{ pathname: '/items', state: { storeId: t.storeId } }}>{t.storeId}</Link> 
                         )
                     }, this)}
 

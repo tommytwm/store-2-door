@@ -18,6 +18,14 @@ exports.get_item_by_id = function (req, res) {
     });
 };
 
+exports.get_item_by_store_id = function (req, res) {
+    Item.getItemByStoreId(req.params.itemId, function (err, item) {
+        if (err)
+            res.send(err);
+        res.json(item);
+    });
+};
+
 exports.get_all_items = function (req, res) {
     Item.getAllItems(function(err, item) {
         if (err)

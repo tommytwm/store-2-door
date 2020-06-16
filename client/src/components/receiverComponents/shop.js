@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Cell } from 'react-mdl';
 import { Link } from 'react-router-dom';
+import '../../App.css';
 
 
 // this class should display any nearby users along with stores to select from
@@ -19,10 +20,10 @@ class Shop extends Component {
     }
 
     componentDidMount() {
-        fetch('/api/example')// change this
-            .then(res => res.json()) // without this, it is empty
+        fetch('/api/provider')
+            .then(res => res.json())
             .then(providers => this.setState({ providers }, () => console.log('providers fetched...', providers)));
-        fetch('/api/example/users') // change this
+        fetch('/api/store/') 
             .then(res => res.json()) 
             .then(stores => this.setState({ stores }, () => console.log('users fetched...', stores)));
     }
@@ -30,6 +31,7 @@ class Shop extends Component {
            
     render() {
         return (
+
             <div className='landing-grid' style={{ fontFamily: 'Roboto Mono' }}>
                 <Grid style={{ paddingTop: '10em' }}>
                     <div className="mdl-layout-spacer"></div>
@@ -42,13 +44,11 @@ class Shop extends Component {
                             <div className="floating-div">
                                 <ul style={{ listStyle: 'none' }}>
                                     {this.state.providers.map(provider =>
-                                        <li key={provider.adminId}>
-                                            <Link key={provider.adminId} to={{ pathname: '/providers', state: { pId: provider.adminId } }}>{provider.name}</Link>
-                                        </li> // TODO: change admin ID to users
+                                        <li key={provider.uid}>
+                                            <Link key={provider.uid} to={{ pathname: '/providers', state: { pId: provider.uid } }}>{provider.numDeliveries}</Link>
+                                        </li> 
                                         )}
                                 </ul>
-
-
 
                             </div>
                         </div>
@@ -56,15 +56,20 @@ class Shop extends Component {
                     <div className="mdl-layout-spacer"></div>
                     <Cell style={{background: '#C8C4A7', color: 'white', textAlign: 'left', padding: '2em'}} col={8}>
 
-                        <div>
-                            shop
-                        {this.state.stores.map(function (s) {
-                            return (
-                                <Link key={s.uid} to={{ pathname: '/items', state: { storeId: s.uid } }}>{s.name}</Link> // TODO: change uid to store id
-                            )
-                        }, this)}
+                    <div>
+                        <h3>Available Stores</h3>
+                        <Grid className="demo-grid-3">
 
-                        </div>
+                            {this.state.stores.map(function (s) {
+                                return (
+                                    <Cell className= "mdl-cell--4-col" col={4}>
+                                        <Link key={s.storeId} to={{ pathname: '/items', state: { storeId: s.storeId } }}>{s.name}</Link> 
+                                    </Cell>
+                                )
+                            }, this)}
+                        </Grid>
+
+                    </div>
                         
 
                     </Cell>

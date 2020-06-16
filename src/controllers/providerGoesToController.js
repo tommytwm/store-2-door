@@ -18,6 +18,14 @@ exports.get_provider_goes_to_by_id = function (req, res) {
     });
 };
 
+exports.get_provider_goes_to_by_pid = function (req, res) {
+    ProviderGoesTo.getProviderGoesToByPId(req.params.uid, function (err, providerGoesTo) {
+        if (err)
+            res.send(err);
+        res.json(providerGoesTo);
+    });
+};
+
 exports.get_all_provider_goes_tos = function (req, res) {
     ProviderGoesTo.getAllProviderGoesTos(function(err, providerGoesTo) {
         if (err)
