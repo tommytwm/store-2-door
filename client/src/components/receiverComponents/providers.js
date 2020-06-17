@@ -14,7 +14,7 @@ class Providers extends Component { // props: pId
     }
 
     componentDidMount() {
-        fetch('/api/providerGoesTo/'+this.state.pId)// change this
+        fetch('/api/providerGoesTo/'+ this.state.pId)// change this
             .then(res => res.json()) 
             .then(trips => this.setState({ trips }, () => console.log('trips fetched...', trips)));
     }

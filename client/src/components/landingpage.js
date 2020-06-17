@@ -25,7 +25,7 @@ class Landing extends Component {
                             laborum.</h5>
 
                             <h2>Sign Up!</h2>
-                          
+                            {sessionStorage.setItem("uId", 11)}
 
                         </div>
                         <br />

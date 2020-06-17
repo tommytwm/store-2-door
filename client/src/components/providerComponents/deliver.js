@@ -23,7 +23,13 @@ class Deliver extends Component {
     render() {
         return (
             <div className='landing-grid' style={{ fontFamily: 'Roboto Mono' }}>
+                <Grid style={{ paddingTop: '10em' }}>
+                    <div className="mdl-layout-spacer"></div>
+                    <Cell col={4} style={{ background: 'rgba(47,43,14,0.65)' }}>
 
+
+                    </Cell>
+                </Grid>
             </div>
         );
     }
