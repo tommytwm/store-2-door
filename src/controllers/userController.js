@@ -10,16 +10,8 @@ exports.create_user = function(req, res) {
     });
 };
 
-exports.add_user = function(req, res) {
-  User.addUser(req.body.name, req.params.geoLocId, req.body.email, function(err, user) {
-    if (err)
-      res.send(err);
-    res.json(user);
-});
-};
-
 exports.delete_user = function(req, res) {
-  User.addUser(req.params.uid, function(err, user) {
+  User.deleteUser(req.params.uid, function(err, user) {
     if (err)
       res.send(err);
     res.json(user);
