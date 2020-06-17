@@ -8,14 +8,7 @@ import { Link } from 'react-router-dom';
 
 
 class App extends Component {
-    state = { user: '' }
-
-    handleUser = (userVal) => {
-        this.setState({ user: userVal });
-    }
-
-render() {
-    console.log("here")
+    render() {
         return (
             <div className="demo-big-content">
                 <Layout>
@@ -27,9 +20,8 @@ render() {
                             </div>
 
                         }
-
-
-                        scroll>
+                        scroll
+                    >
                         <Navigation>
                             <Link style={{ color: '#2F2B0E', fontSize: '1.35em' }} to={process.env.PUBLIC_URL + "/"}>Home</Link>
                             <Link style={{ color: '#2F2B0E', fontSize: '1.35em' }} to={process.env.PUBLIC_URL + "/shop"}>Shop</Link>
