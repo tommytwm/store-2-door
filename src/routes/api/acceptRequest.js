@@ -6,4 +6,6 @@ router.get('/', acceptRequestController.get_all_accept_requests);
 
 router.post('/', acceptRequestController.create_accept_request);
 
+router.delete('/remove-request/:requestId/:providerId', acceptRequestController.deleted_accepted_request);
+
 module.exports = router;
