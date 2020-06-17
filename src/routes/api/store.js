@@ -9,6 +9,6 @@ router.put('/update', storeController.edit_store);
 
 router.post('/', storeController.create_store);
 
-router.delete('/remove/:storeId', storeController.delete_store);
+router.delete('/:storeId', storeController.delete_store);
 
 module.exports = router;

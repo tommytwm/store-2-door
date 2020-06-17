@@ -19,7 +19,7 @@ exports.edit_store = function (req, res) {
 };
 
 exports.delete_store = function (req, res) {
-  Store.deleteStore(req.param.storeId, function(err, store) {
+  Store.deleteStore(req.params.storeId, function(err, store) {
       if (err)
         res.send(err);
       res.json(store);
