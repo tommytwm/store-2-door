@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Cell } from 'react-mdl';
 import { Link } from 'react-router-dom';
+import Ratings from '../ratings';
 
 // this class should query on providers and trips to stores 
 // TODO: CREATE THE REVIEWS 
@@ -30,10 +31,10 @@ class Providers extends Component { // props: pId
                 </Grid>
             )
         return (
-            <Grid>
+            <Grid className="demo-grid-ruler">
                 <Cell col={4}>
                     <h1>{this.props.location.state.name}</h1>
-                    <Cell col={2}></Cell>
+                    <Cell col={12}><Ratings/></Cell>
                 </Cell>
 
                 <Cell col={8}>

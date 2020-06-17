@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Grid, Cell } from 'react-mdl';
-import { Link } from 'react-router-dom';
 
 // fetch Item given ORDER REQUEST 
 class Item extends Component { // props: pId
