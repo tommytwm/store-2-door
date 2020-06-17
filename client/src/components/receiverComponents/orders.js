@@ -24,6 +24,7 @@ class Orders extends Component { // props: pId
 
 
     render() {
+        console.log(this.state.orders)
     return (
             <Grid>
             <Cell col={4}>
@@ -38,6 +39,7 @@ class Orders extends Component { // props: pId
                             <div className="header-color">
                                     <Cell col={6}><h3>Order Request: {o.requestId}</h3>
                                         <OrderInformation requestId={o.requestId} />
+                                        <h3>The total for this order is: ${Math.round((o.totalprice + Number.EPSILON) * 100) / 100}</h3>
                                     </Cell>
 
                                     <Cell col={6}><Item orderId={o.requestId}></Item></Cell>

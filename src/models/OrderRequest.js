@@ -51,7 +51,7 @@ OrderRequest.getOrderRequestById = function(requestId, result) {
 OrderRequest.getOrderRequestByReceiverId = function(receiverId, result) {
     sql.query(
         {
-            sql: "SELECT * FROM orderrequest WHERE receiverId = ?",
+            sql: "SELECT o.requestId, SUM(i.price) totalprice FROM orderrequest o, containsitem c, item i WHERE receiverId = ? AND c.requestId = o.requestId AND c.itemId = i.itemId GROUP BY (o.requestId)",
             values: [receiverId] 
         },
         function (err, res) {             

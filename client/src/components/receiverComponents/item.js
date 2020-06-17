@@ -13,7 +13,7 @@ class Item extends Component { // props: pId
     componentDidMount() {
         fetch('/api/containsItem/' + this.props.orderId)// change this
             .then(res => res.json())
-            .then(orders => this.setState({ orders }, () => console.log('orders fetched...', orders)));
+            .then(orders => this.setState({ orders }, () => console.log('items fetched...', orders)));
     }
 
     render() {

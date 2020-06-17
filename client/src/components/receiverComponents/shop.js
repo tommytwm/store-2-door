@@ -9,6 +9,7 @@ import '../../App.css';
         // given the provider and store, it should take you to the items page where items can be selected and added to the cart
 
 // user scenario 2: click on store, it will bring you to items page, then can add items to orderRequest
+// BUG: won't show providers if they have no rating
 
 // TODO: show AVG of the providers
 class Shop extends Component {
@@ -23,12 +24,12 @@ class Shop extends Component {
     componentDidMount() {
 
         const proxyurl = "https://cors-anywhere.herokuapp.com/";
-        fetch(proxyurl+'https://store-2-door.herokuapp.com/api/user/')
+        fetch('/api/provider/profiles/')
             .then(res => res.json())
             .then(providers => this.setState({ providers }, () => console.log('providers fetched...', providers)));
-        fetch(proxyurl+ 'https://store-2-door.herokuapp.com/api/store/') 
+        fetch('api/store/') 
             .then(res => res.json()) 
-            .then(stores => this.setState({ stores }, () => console.log('users fetched...', stores)));
+            .then(stores => this.setState({ stores }, () => console.log('stores fetched...', stores)));
     }
 
            
@@ -48,7 +49,7 @@ class Shop extends Component {
                                 <ul style={{ listStyle: 'none' }}>
                                     {this.state.providers.map(provider =>
                                         <li key={provider.uid}>
-                                            <Link key={provider.uid} to={{ pathname: '/providers', state: { pId: provider.uid, name: provider.name } }}>{provider.name}</Link>
+                                            <h5>Average Rating: {Math.round((provider.avgrate + Number.EPSILON) * 100) / 100}</h5><Link key={provider.uid} to={{ pathname: '/providers', state: { pId: provider.uid, name: provider.name } }}>{provider.name}</Link>
                                         </li> 
                                         )}
                                 </ul>
