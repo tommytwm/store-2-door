@@ -64,7 +64,7 @@ class Shop extends Component {
 
                             {this.state.stores.map(function (s, i) {
                                 return (
-                                    <Cell className= "mdl-cell--4-col" col={4}>
+                                    <Cell key= { i } className= "mdl-cell--4-col" col={4}>
                                         <Link key={i} to={{ pathname: '/items', state: { storeId: s.storeId } }}>{s.name}</Link> 
                                     </Cell>
                                 )
