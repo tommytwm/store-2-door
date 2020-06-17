@@ -10,6 +10,7 @@ import '../../App.css';
 
 // user scenario 2: click on store, it will bring you to items page, then can add items to orderRequest
 
+// TODO: show AVG of the providers
 class Shop extends Component {
     constructor() {
         super();
@@ -20,10 +21,12 @@ class Shop extends Component {
     }
 
     componentDidMount() {
-        fetch('/api/provider')
+
+        const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        fetch(proxyurl+'https://store-2-door.herokuapp.com/api/user/')
             .then(res => res.json())
             .then(providers => this.setState({ providers }, () => console.log('providers fetched...', providers)));
-        fetch('/api/store/') 
+        fetch(proxyurl+ 'https://store-2-door.herokuapp.com/api/store/') 
             .then(res => res.json()) 
             .then(stores => this.setState({ stores }, () => console.log('users fetched...', stores)));
     }
@@ -40,12 +43,12 @@ class Shop extends Component {
                             <div style={{ textAlign: 'center' }}>
                             </div>
                             <h4 >Nearby Providers</h4>
-                            <h6>click to see provider trips</h6>
+                            <h6>Click To See Upcoming Provider Trips</h6>
                             <div className="floating-div">
                                 <ul style={{ listStyle: 'none' }}>
                                     {this.state.providers.map(provider =>
                                         <li key={provider.uid}>
-                                            <Link key={provider.uid} to={{ pathname: '/providers', state: { pId: provider.uid } }}>{provider.numDeliveries}</Link>
+                                            <Link key={provider.uid} to={{ pathname: '/providers', state: { pId: provider.uid, name: provider.name } }}>{provider.name}</Link>
                                         </li> 
                                         )}
                                 </ul>
@@ -60,10 +63,10 @@ class Shop extends Component {
                         <h3>Available Stores</h3>
                         <Grid className="demo-grid-3">
 
-                            {this.state.stores.map(function (s) {
+                            {this.state.stores.map(function (s, i) {
                                 return (
                                     <Cell className= "mdl-cell--4-col" col={4}>
-                                        <Link key={s.storeId} to={{ pathname: '/items', state: { storeId: s.storeId } }}>{s.name}</Link> 
+                                        <Link key={i} to={{ pathname: '/items', state: { storeId: s.storeId } }}>{s.name}</Link> 
                                     </Cell>
                                 )
                             }, this)}

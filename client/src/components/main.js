@@ -5,6 +5,8 @@ import LandingPage from './landingpage';
 import Deliver from './providerComponents/deliver';
 import Items from './receiverComponents/items';
 import Providers from './receiverComponents/providers';
+import SignIn from './signinpage';
+import Orders from './receiverComponents/orders';
 
 
 const Main = () => (
@@ -14,6 +16,8 @@ const Main = () => (
         <Route path="/deliver" component={Deliver} />
         <Route path="/items" component={Items} />
         <Route path="/providers" component={Providers} />
+        <Route path="/signin" component={SignIn} />
+        <Route path="/orders" component={Orders} />
     </Switch>
 )
 

@@ -34,7 +34,7 @@ AcceptRequest.getAcceptRequestById = function(requestId, providerId, result) {
 AcceptRequest.getAcceptRequestByRequestId = function(requestId, result) {
     sql.query(
         {
-            sql: "SELECT * FROM acceptrequest WHERE (requestId = ?) GROUP BY requestId",
+            sql: "SELECT * FROM acceptrequest, user WHERE (requestId = ? AND providerId = uid)",
             values: [requestId] 
         },
         function (err, res) {             
