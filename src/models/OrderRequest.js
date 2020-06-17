@@ -10,6 +10,7 @@ var OrderRequest = function(orderRequest) {
 
 OrderRequest.createOrderRequest = function(newOrderRequest, result) {
     createModel("orderrequest", newOrderRequest, result);
+
 };
 
 OrderRequest.deleteOrderRequest = function(requestId, result) {

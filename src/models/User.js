@@ -14,24 +14,6 @@ User.createUser = function(newUser, result) {
     createModel("user", newUser, result);
 };
 
-User.addUser = function(name, email, geoLocId, result) {
-    sql.query(
-        {
-            sql: "INSERT INTO User(name, email, geoLocId) VALUES(name = ?, email = ?, geoLocId = ?)",
-            values: [name, email, geoLocId] 
-        },
-        function (err, res) {             
-            if(err) {
-                console.log("error: ", err);
-                result(err, null);
-            }
-            else{
-                result(null, res);
-            }
-        }
-    );
-}
-
 User.deleteUser = function(uid, result) {
     sql.query(
         {
@@ -50,11 +32,11 @@ User.deleteUser = function(uid, result) {
     );
 };
 
-User.editUser = function(uid, name, email, geoLocId, result) {
+User.editUser = function(uid, name, geoLocId, email, result) {
     sql.query(
         {
-            sql: "UPDATE user SET name = ?, email = ?, geoLocId = ? WHERE uid = ?",
-            values: [name, email, geoLocId, uid] 
+            sql: "UPDATE user SET name = ?, geoLocId = ?, email = ? WHERE uid = ?",
+            values: [name, geoLocId, email, uid] 
         },
         function (err, res) {             
             if(err) {
@@ -107,7 +89,7 @@ User.getUserByName = function(name, result) {
 User.getUsersWithReviews = function(result) {
     sql.query(
         {
-            sql: " SELECT u.uid FROM Users u, Review r WHERE u.uid = r.uid"
+            sql: "SELECT u.uid FROM Users u, Review r WHERE u.uid = r.uid"
         },
         function (err, res) {             
             if(err) {

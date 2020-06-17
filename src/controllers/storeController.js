@@ -10,6 +10,22 @@ exports.create_store = function(req, res) {
     });
 };
 
+exports.edit_store = function (req, res) {
+  Store.editStore(req.body.storeId, req.body.name, req.body.geoLocId, function(err, store) {
+      if (err)
+        res.send(err);
+      res.json(store);
+  });
+};
+
+exports.delete_store = function (req, res) {
+  Store.deleteStore(req.params.storeId, function(err, store) {
+      if (err)
+        res.send(err);
+      res.json(store);
+  });
+};
+
 exports.get_store_by_id = function (req, res) {
     Store.getStoreById(req.params.storeId, function(err, store) {
         if (err)
@@ -19,14 +35,23 @@ exports.get_store_by_id = function (req, res) {
 };
 
 
-exports.get_organic_stores = function (req, res) {
+
+exports.get_organic_stores = function (res) {
     Store.getOrganicStores(function (err, store) {
         if (err)
             res.send(err);
-        console.log("got stores")
         res.json(store);
     });
 };
+
+exports.get_store_with_min_items = function (req, res) {
+  Store.getStoreWithMinItems(req.params.num, function(err, store) {
+      if (err)
+          res.send(err);
+      res.json(store);
+  });
+};
+
 exports.get_all_stores = function (req, res) {
     Store.getAllStores(function(err, store) {
         if (err)

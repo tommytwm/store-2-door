@@ -19,7 +19,7 @@ exports.add_rating = function (req, res) {
 };
 
 exports.delete_rating = function (req, res) {
-  Rating.deleteRating(req.params.uid, function(err, rating) {
+  Rating.deleteRating(req.params.ratingId, function(err, rating) {
       if (err)
         res.send(err);
       res.json(rating);
@@ -35,16 +35,15 @@ exports.get_rating_by_id = function (req, res) {
 };
 
 exports.get_rating_by_uid = function (req, res) {
-    Rating.getRatingByUId(req.params.uid, function (err, rating) {
-        if (err)
-            res.send(err);
-        console.log("GETTING THE RATES")
-        res.json(rating);
-    });
+  Rating.getRatingByUid(req.params.uid, function(err, rating) {
+      if (err)
+        res.send(err);
+      res.json(rating);
+  });
 };
 
-exports.get_users_with_rating = function (req, res) {
-  Rating.getUsersWithRating(req.params.minRating, function (err, users) {
+exports.get_users_with_min_rating = function (req, res) {
+  Rating.getUsersWithMinRating(req.params.minRating, function (err, users) {
     if (err)
       res.send(err);
     res.json(users);
