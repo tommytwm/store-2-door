@@ -34,8 +34,8 @@ exports.get_rating_by_id = function (req, res) {
     });
 };
 
-exports.get_users_with_rating = function (req, res) {
-  Rating.getUsersWithRating(req.params.minRating, function (err, users) {
+exports.get_users_with_min_rating = function (req, res) {
+  Rating.getUsersWithMinRating(req.params.minRating, function (err, users) {
     if (err)
       res.send(err);
     res.json(users);
