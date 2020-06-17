@@ -18,6 +18,15 @@ exports.get_store_by_id = function (req, res) {
     });
 };
 
+
+exports.get_organic_stores = function (req, res) {
+    Store.getOrganicStores(function (err, store) {
+        if (err)
+            res.send(err);
+        console.log("got stores")
+        res.json(store);
+    });
+};
 exports.get_all_stores = function (req, res) {
     Store.getAllStores(function(err, store) {
         if (err)
