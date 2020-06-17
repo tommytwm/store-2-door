@@ -15,7 +15,7 @@ class Orders extends Component { // props: pId
     }
 
     componentDidMount() {
-        fetch('api/orderRequest/by-receiver/' + sessionStorage.getItem('uId'))
+        fetch('api/orderRequest/receiver/' + sessionStorage.getItem('uId'))
             .then(res => res.json())
             .then(orders => this.setState({ orders }, () => console.log('orders fetched...', orders)));
     }

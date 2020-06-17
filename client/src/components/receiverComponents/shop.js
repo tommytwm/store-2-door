@@ -17,7 +17,8 @@ class Shop extends Component {
         super();
         this.state = {
             providers: [],
-            stores:[]
+            stores: [],
+            organicstores: []
         };
     }
 
@@ -28,6 +29,9 @@ class Shop extends Component {
         fetch('api/store/') 
             .then(res => res.json()) 
             .then(stores => this.setState({ stores }, () => console.log('stores fetched...', stores)));
+        fetch('api/store/organics/')
+            .then(res => res.json())
+            .then(organicstores => this.setState({ organicstores }, () => console.log('organic stores fetched...', organicstores)));
     }
 
            
@@ -72,7 +76,20 @@ class Shop extends Component {
                         </Grid>
 
                     </div>
-                        
+                        <div>
+                            <h3>Available Stores That Sell All Of The Organic Items</h3>
+                            <Grid className="demo-grid-3">
+
+                                {this.state.organicstores.map(function (s, i) {
+                                    return (
+                                        <Cell key={i} className="mdl-cell--4-col" col={4}>
+                                            <Link key={i} to={{ pathname: '/items', state: { storeId: s.storeId } }}>{s.name}</Link>
+                                        </Cell>
+                                    )
+                                }, this)}
+                            </Grid>
+
+                        </div>   
 
                     </Cell>
                 </Grid>
