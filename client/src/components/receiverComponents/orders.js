@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Grid, Cell } from 'react-mdl';
 import Item from './item';
+import OrderInformation from './orderinformation';
+import '../../App.css';
+
 
 // show ORDER ID: item 1,2,3.... total price: xxx
 class Orders extends Component { // props: pId
@@ -24,7 +27,7 @@ class Orders extends Component { // props: pId
     return (
             <Grid>
             <Cell col={4}>
-                <h2>Orders for :{sessionStorage.getItem("name")}</h2>
+                <h2>Orders for: {sessionStorage.getItem("name")}</h2>
 
                 </Cell>
 
@@ -32,8 +35,10 @@ class Orders extends Component { // props: pId
                     <div>
                         {this.state.orders.map(function (o) {
                             return (
-                            <div>
-                                    <Cell col={6}><h3>Order Request: {o.requestId}</h3></Cell>
+                            <div className="header-color">
+                                    <Cell col={6}><h3>Order Request: {o.requestId}</h3>
+                                        <OrderInformation requestId={o.requestId} />
+                                    </Cell>
 
                                     <Cell col={6}><Item orderId={o.requestId}></Item></Cell>
                             </div>

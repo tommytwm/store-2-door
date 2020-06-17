@@ -3,7 +3,8 @@ import { Grid, Cell } from 'react-mdl';
 import { Link } from 'react-router-dom';
 
 // this class should query on providers and trips to stores 
-// TODO: change fetch to use this.state.pId to fetch trips
+// TODO: CREATE THE REVIEWS 
+// FUTURE IMPLEMENTATION: ability to filter out any trips that are in the past
 class Providers extends Component { // props: pId
     constructor(props) {
         super(props);
@@ -31,9 +32,8 @@ class Providers extends Component { // props: pId
         return (
             <Grid>
                 <Cell col={4}>
-                    <h2>Trips For</h2>
                     <h1>{this.props.location.state.name}</h1>
-
+                    <Cell col={2}></Cell>
                 </Cell>
 
                 <Cell col={8}>
@@ -41,7 +41,7 @@ class Providers extends Component { // props: pId
                         <h3>Trips:</h3>
                         {this.state.trips.map(function (t) {
                         return (
-                            <Link key={t.uid} to={{ pathname: '/items', state: { storeId: t.storeId, providerId: this.props.location.state.name } }}>{t.storeId}</Link> 
+                            <Link key={t.uid} to={{ pathname: '/items', state: { storeId: t.storeId, providerId: this.props.location.state.name } }}>{t.name}</Link> 
                         )
                     }, this)}
 
