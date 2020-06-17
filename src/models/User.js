@@ -14,11 +14,29 @@ User.createUser = function(newUser, result) {
     createModel("user", newUser, result);
 };
 
-User.getUserById = function(userId, result) {
+User.addUser = function(name, email, geoLocId, result) {
     sql.query(
         {
-            sql: "SELECT * FROM user WHERE uid = ?",
-            values: [userId] 
+            sql: "INSERT INTO User(name, email, geoLocId) VALUES(name = ?, email = ?, geoLocId = ?)",
+            values: [name, email, geoLocId] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+}
+
+User.deleteUser = function(uid, result) {
+    sql.query(
+        {
+            sql: "DELETE FROM user WHERE uid = ?",
+            values: [uid] 
         },
         function (err, res) {             
             if(err) {
@@ -32,8 +50,98 @@ User.getUserById = function(userId, result) {
     );
 };
 
+User.editUser = function(uid, name, email, geoLocId, result) {
+    sql.query(
+        {
+            sql: "UPDATE user SET name = ?, email = ?, geoLocId = ? WHERE uid = ?",
+            values: [name, email, geoLocId, uid] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+};
+
+User.getUserById = function(uid, result) {
+    sql.query(
+        {
+            sql: "SELECT * FROM user WHERE uid = ?",
+            values: [uid] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+};
+
+User.getUserByName = function(name, result) {
+    sql.query(
+        {
+            sql: "SELECT * FROM user WHERE name = ?",
+            values: [name] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+}
+
+User.getUsersWithReviews = function(result) {
+    sql.query(
+        {
+            sql: " SELECT u.uid FROM Users u, Review r WHERE u.uid = r.uid"
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+}
+
 User.getAllUsers = function(result) {
     getAllModels("user", result);
 };
+
+User.loginUser = function(name, email, result) {
+    sql.query(
+        {
+            sql: "SELECT * FROM user WHERE (name = ? AND email = ?)",
+            values: [name, email]
+        },
+        function (err, res) {
+            console.log(res);
+            if (err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else {
+                result(null, res);
+            }
+        }
+    )
+}
 
 module.exports = User;

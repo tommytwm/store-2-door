@@ -12,7 +12,7 @@ ProviderGoesTo.createProviderGoesTo = function(newProviderGoesTo, result) {
     createModel("providergoesto", newProviderGoesTo, result);
 };
 
-ProviderGoesTo.getProviderGoesToById = function(uid, storeId, result) {
+ProviderGoesTo.getProviderGoesToStoreId = function(uid, storeId, result) {
     sql.query(
         {
             sql: "SELECT * FROM providergoesto WHERE (uid = ? AND storeId = ?)",
@@ -24,6 +24,25 @@ ProviderGoesTo.getProviderGoesToById = function(uid, storeId, result) {
                 result(err, null);
             }
             else{
+                result(null, res);
+            }
+        }
+    );
+};
+
+
+ProviderGoesTo.getProviderId = function (uid, result) {
+    sql.query(
+        {
+            sql: "SELECT * FROM providergoesto p, store s WHERE (uid = ? AND s.storeId = p.storeId)",
+            values: [uid]
+        },
+        function (err, res) {
+            if (err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else {
                 result(null, res);
             }
         }

@@ -5,7 +5,11 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "client-install": "cd client && npm install",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -16,8 +20,12 @@
   "bugs": {
     "url": "https://github.com/tommytwm/store-2-door/issues"
   },
+  "devDependencies": {
+    "nodemon": "^1.14.6"
+  },
   "homepage": "https://github.com/tommytwm/store-2-door#readme",
   "dependencies": {
+    "concurrently": "^3.5.1",
     "express": "^4.17.1",
     "mysql": "^2.18.1"
   }
