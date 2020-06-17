@@ -22,8 +22,6 @@ class Shop extends Component {
     }
 
     componentDidMount() {
-
-        const proxyurl = "https://cors-anywhere.herokuapp.com/";
         fetch('/api/provider/profiles/')
             .then(res => res.json())
             .then(providers => this.setState({ providers }, () => console.log('providers fetched...', providers)));

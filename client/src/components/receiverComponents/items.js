@@ -18,7 +18,6 @@ class Items extends Component {
     
 
     componentDidMount() {
-        const proxyurl = "https://cors-anywhere.herokuapp.com/";
         fetch('/api/item/by-store/' + this.props.location.state.storeId)
             .then(res => res.json()) 
             .then(items => this.setState({ items }, () => console.log('items fetched...', items)));
@@ -27,6 +26,7 @@ class Items extends Component {
             .then(r => r[0])
             .then(store => this.setState({ store }, () => console.log('store fetched...', store)));
     }
+
     createNewItemsForOrder(oId) { // this will add items to the created order request
         for (var key in this.dict) {
             if (this.dict.hasOwnProperty(key)) {
@@ -41,13 +41,11 @@ class Items extends Component {
                         itemId: key
                     })
                 })
-                    .then(response => response.json())
-                    .then(data => console.log("added " + data + key + "for" + oId))
-
+                .then(response => response.json())
+                .then(data => console.log("added " + data + key + "for" + oId))
             }
         }
         alert("Added Items To Order ID" + oId)
- 
     }
 
     handleSubmit(event) { // create the order request then.. ^

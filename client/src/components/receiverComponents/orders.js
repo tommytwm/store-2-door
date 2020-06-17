@@ -15,8 +15,7 @@ class Orders extends Component { // props: pId
     }
 
     componentDidMount() {
-        const proxyurl = "https://cors-anywhere.herokuapp.com/"; // note: using heroku server does not work 
-        fetch('api/orderRequest/by-receiver/' + sessionStorage.getItem('uId'))// change this
+        fetch('api/orderRequest/by-receiver/' + sessionStorage.getItem('uId'))
             .then(res => res.json())
             .then(orders => this.setState({ orders }, () => console.log('orders fetched...', orders)));
     }

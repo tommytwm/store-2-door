@@ -35,7 +35,7 @@ class OrderInformation extends Component { // props: pId
                 <Cell col={12}>
                     <div>
                         {this.state.requests.length > 1 ? <h1>This Request Is Still Pending</h1> :
-                            <h5>This Request has been Accepted by: {this.state.requests[0] != undefined ?
+                            <h5>This Request has been Accepted by: {this.state.requests[0] !== undefined ?
                                 this.getProvider(this.state.requests[0].providerId, this.state.requests[0].name) : null}</h5>}
 
                     </div>

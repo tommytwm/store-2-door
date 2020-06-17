@@ -20,7 +20,6 @@ class Ratings extends Component {
     }
 
     componentDidMount() {
-        const proxyurl = "https://cors-anywhere.herokuapp.com/";
         fetch("/api/rating/user/" +this.props.userId)
             .then(res => res.json())
             .then(ratings => this.setState({ ratings }, () => console.log('ratings fetched...', ratings)));
