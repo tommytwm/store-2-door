@@ -35,7 +35,7 @@ exports.get_items_by_store_id = function (req, res) {
 };
 
 exports.get_items_by_supplier_id = function (req, res) {
-    Item.getItemsByStoreId(req.params.supplier, function (err, item) {
+    Item.getItemsByStoreId(req.params.supplierId, function (err, item) {
         if (err)
             res.send(err);
         res.json(item);
