@@ -10,16 +10,8 @@ exports.create_store = function(req, res) {
     });
 };
 
-exports.add_store = function (req, res) {
-  Store.addStore(req.body.name, req.param.geoLocId, function(err, store) {
-      if (err)
-        res.send(err);
-      res.json(store);
-  });
-};
-
 exports.edit_store = function (req, res) {
-  Store.editStore(req.param.storeId, req.body.name, req.param.geoLocId, function(err, store) {
+  Store.editStore(req.body.storeId, req.body.name, req.body.geoLocId, function(err, store) {
       if (err)
         res.send(err);
       res.json(store);

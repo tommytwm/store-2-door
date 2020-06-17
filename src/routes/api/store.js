@@ -5,10 +5,9 @@ router.get('/:storeId', storeController.get_store_by_id);
 router.get('/', storeController.get_all_stores);
 router.get('/min-items/:num', storeController.get_store_with_min_items);
 
-router.put('/update/:storeId/:name/:geoLocId', storeController.edit_store);
+router.put('/update', storeController.edit_store);
 
 router.post('/', storeController.create_store);
-router.post('/:name/:geoLocId', storeController.add_store);
 
 router.delete('/remove/:storeId', storeController.delete_store);
 

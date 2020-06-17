@@ -13,24 +13,6 @@ Store.createStore = function(newStore, result) {
     createModel("store", newStore, result);
 };
 
-Store.addStore = function(name, geoLocId, result) {
-    sql.query(
-        {
-            sql: "INSERT INTO store(name, geoLocId) VALUES (name = ?, geoLocId = ?)",
-            values: [name, geoLocId] 
-        },
-        function (err, res) {             
-            if(err) {
-                console.log("error: ", err);
-                result(err, null);
-            }
-            else{
-                result(null, res);
-            }
-        }
-    );
-};
-
 Store.editStore = function(storeId, name, geoLocId, result) {
     sql.query(
         {

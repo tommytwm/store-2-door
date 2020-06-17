@@ -89,7 +89,7 @@ User.getUserByName = function(name, result) {
 User.getUsersWithReviews = function(result) {
     sql.query(
         {
-            sql: " SELECT u.uid FROM Users u, Review r WHERE u.uid = r.uid"
+            sql: "SELECT u.uid FROM Users u, Review r WHERE u.uid = r.uid"
         },
         function (err, res) {             
             if(err) {
