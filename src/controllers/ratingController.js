@@ -34,6 +34,14 @@ exports.get_rating_by_id = function (req, res) {
     });
 };
 
+exports.get_rating_by_uid = function (req, res) {
+  Rating.getRatingByUid(req.params.uid, function(err, rating) {
+      if (err)
+        res.send(err);
+      res.json(rating);
+  });
+};
+
 exports.get_users_with_min_rating = function (req, res) {
   Rating.getUsersWithMinRating(req.params.minRating, function (err, users) {
     if (err)
