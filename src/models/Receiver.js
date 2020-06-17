@@ -48,6 +48,24 @@ Receiver.getAllReceiverProfiles = function(result) {
     );
 };
 
+Receiver.getReceiversByNumOrder = function(numOrder, result) {
+    sql.query(
+        {
+            sql: "SELECT u.name, u.email, u.geoLocId, r.numOrders FROM user u, receiver r WHERE r.numOrder = ?",
+            values: [numOrder] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+};
+
 Receiver.getAllReceivers = function(result) {
     getAllModels("receiver", result);
 };

@@ -26,6 +26,14 @@ exports.get_all_provider_profiles = function (req, res) {
   });
 };
 
+exports.get_provider_by_num_deliveries = function (req, res) {
+  Provider.getProvidersByNumDeliveries(req.body.numDeliveries, function(err, provider) {
+    if (err)
+      res.send(err);
+    res.json(provider);
+  });
+};
+
 exports.get_all_providers = function (req, res) {
   Provider.getAllProviders(function(err, provider) {
       if (err)

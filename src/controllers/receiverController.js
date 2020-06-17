@@ -26,6 +26,14 @@ exports.get_all_receiver_profiles = function (req, res) {
   });
 };
 
+exports.get_receivers_by_num_order = function (req, res) {
+  Receiver.getReceiversByNumOrder(req.body.numOrder, function(err, receiver) {
+      if (err)
+        res.send(err);
+      res.json(receiver);
+  });
+};
+
 exports.get_all_receivers = function (req, res) {
     Receiver.getAllReceivers(function(err, receiver) {
         if (err)
