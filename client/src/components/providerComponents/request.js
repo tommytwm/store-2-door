@@ -50,14 +50,14 @@ class Request extends Component {
     }
 
     render() {
-        if (this.state.request == null)
+        if (this.state.request === null)
             return (
                 <Grid>
                     <div>An error occured</div>
                 </Grid>
             )
 
-        if (this.state.request.isAccepted == 0) {
+        if (this.state.request.isAccepted === 0)
             return (
                 <Grid>
                     <Cell col={4}>
@@ -73,8 +73,8 @@ class Request extends Component {
                     </Cell>
                 </Grid>
             )
-        }
-        else {
+        
+        else
             return (
                 <Grid>
                     <Cell col={4}>
@@ -87,7 +87,7 @@ class Request extends Component {
                     </Cell>
                 </Grid>
             )
-        }
+        
     }
 }
 
