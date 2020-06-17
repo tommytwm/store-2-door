@@ -25,6 +25,7 @@ class App extends Component {
                         <Navigation>
                             <Link style={{ color: '#2F2B0E', fontSize: '1.35em' }} to={process.env.PUBLIC_URL + "/"}>Home</Link>
                             <Link style={{ color: '#2F2B0E', fontSize: '1.35em' }} to={process.env.PUBLIC_URL + "/shop"}>Shop</Link>
+                            <Link style={{ color: '#2F2B0E', fontSize: '1.35em' }} to={process.env.PUBLIC_URL + "/deliver"}>Deliver</Link>
                             <Link style={{ color: '#2F2B0E', fontSize: '1.35em' }} to={process.env.PUBLIC_URL + "/orders"}>Orders</Link>
                         </Navigation>
                     </Header>
@@ -32,6 +33,7 @@ class App extends Component {
                         <Navigation style={{ fontFamily: 'Roboto Mono' }}>
                             <Link to={process.env.PUBLIC_URL + "/"} >Home</Link>
                             <Link to={process.env.PUBLIC_URL + "/shop"} >Shop</Link>
+                            <Link to={process.env.PUBLIC_URL + "/deliver"} >Deliver</Link>
                             <Link to={process.env.PUBLIC_URL + "/orders"}>Orders</Link>
                         </Navigation>
                     </Drawer>
