@@ -62,27 +62,23 @@ Store.getStoreById = function(storeId, result) {
                 result(err, null);
             }
             else {
-                console.log("GETTING BY ID")
                 result(null, res);
             }
         }
     );
 };
 
-
 Store.getOrganicStores = function (result) {
     sql.query(
         {
-            sql: "SELECT * FROM store s WHERE NOT EXISTS (SELECT i.name FROM item i WHERE i.name LIKE '%organic%' AND NOT EXISTS (SELECT i1.name FROM item i1 WHERE i1.storeId = s.storeId AND i.name = i1.name))"
+            sql: "SELECT s.storeId, s.name, s.geoLocId FROM store s WHERE NOT EXISTS (SELECT i.name FROM item i WHERE i.name LIKE '%organic%' AND NOT EXISTS (SELECT i1.name FROM item i1 WHERE i1.storeId = s.storeId AND i.name = i1.name))",
         },
-        function (err, res) {
-            if (err) {
+        function (err, res) {             
+            if(err) {
                 console.log("error: ", err);
                 result(err, null);
             }
-            else {
-                console.log("GETTING ORGANIC")
-                console.log(res)
+            else{
                 result(null, res);
             }
         }
@@ -109,7 +105,6 @@ Store.getStoreWithMinItems = function(num, result) {
 
 
 Store.getAllStores = function (result) {
-    console.log("GETTING ALL")
     getAllModels("store", result);
 };
 
