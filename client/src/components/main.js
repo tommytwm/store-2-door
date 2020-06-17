@@ -7,7 +7,7 @@ import Items from './receiverComponents/items';
 import Providers from './receiverComponents/providers';
 import SignIn from './signinpage';
 import Orders from './receiverComponents/orders';
-
+import Request from './providerComponents/request';
 
 const Main = () => (
     <Switch>
@@ -18,6 +18,7 @@ const Main = () => (
         <Route path="/providers" component={Providers} />
         <Route path="/signin" component={SignIn} />
         <Route path="/orders" component={Orders} />
+        <Route path="/request" component={Request} />
     </Switch>
 )
 
