@@ -21,11 +21,10 @@ class Orders extends Component { // props: pId
 
 
     render() {
-        console.log(sessionStorage.getItem("uId"))
     return (
             <Grid>
             <Cell col={4}>
-                <h2>Orders for :{sessionStorage.getItem("uId")}</h2>
+                <h2>Orders for :{sessionStorage.getItem("name")}</h2>
 
                 </Cell>
 

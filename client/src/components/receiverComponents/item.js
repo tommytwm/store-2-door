@@ -23,10 +23,10 @@ class Item extends Component { // props: pId
 
                 <Cell col={12}>
                     <div>
-                        Items:
+                        <h3>Items:</h3>
                         {this.state.orders.map(function (o) {
                         return (
-                            <div>{o.itemId}</div>
+                            <div>{o.name}</div>
                         )
                     }, this)}
 
