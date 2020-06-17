@@ -32,11 +32,11 @@ User.deleteUser = function(uid, result) {
     );
 };
 
-User.editUser = function(uid, name, email, geoLocId, result) {
+User.editUser = function(uid, name, geoLocId, email, result) {
     sql.query(
         {
-            sql: "UPDATE user SET name = ??, email = ??, geoLocId = ? WHERE uid = ?",
-            values: [name, email, geoLocId, uid] 
+            sql: "UPDATE user SET name = ?, geoLocId = ?, email = ? WHERE uid = ?",
+            values: [name, geoLocId, email, uid] 
         },
         function (err, res) {             
             if(err) {

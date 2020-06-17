@@ -9,7 +9,7 @@ router.post('/find', userController.get_user_by_name);
 router.post('/', userController.create_user);
 router.post('/login', userController.login_user);
 
-router.put('/:name/:email/:geoLocId', userController.edit_user);
+router.put('/edit/', userController.edit_user);
 
 router.delete('/:uid', userController.delete_user);
 

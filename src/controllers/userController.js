@@ -19,7 +19,7 @@ exports.delete_user = function(req, res) {
 };
 
 exports.edit_user = function(req, res) {
-  User.editUser(req.params.uid, req.body.name, req.body.email, req.params.geoLocId, function(err, user) {
+  User.editUser(req.body.uid, req.body.name, req.body.geoLocId, req.body.email, function(err, user) {
     if (err)
       res.send(err);
     res.json(user);
