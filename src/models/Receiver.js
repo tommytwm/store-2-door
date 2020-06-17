@@ -12,6 +12,24 @@ Receiver.createReceiver = function(newReceiver, result) {
     createModel("receiver", newReceiver, result);
 };
 
+Receiver.orderRequest = function(requestId, receiverId, result) {
+    sql.query(
+        {
+            sql: "INSERT INTO orderrequest VALUES(requestId = ?, receiverId = ?)",
+            values: [requestId, receiverId] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+}
+
 Receiver.getReceiverById = function(receiverId, result) {
     sql.query(
         {
