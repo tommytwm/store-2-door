@@ -5,7 +5,7 @@ router.get('/:uid', userController.get_user_by_id);
 router.get('/reviewed-users', userController.get_users_with_reviews);
 router.get('/', userController.get_all_users);
 
-router.post('/add/:geoLocId', userController.add_user);
+router.post('/find', userController.get_user_by_name);
 router.post('/', userController.create_user);
 router.post('/login', userController.login_user);
 

@@ -11,7 +11,7 @@ exports.create_user = function(req, res) {
 };
 
 exports.add_user = function(req, res) {
-  User.addUser(req.body.name, req.body.email, req.params.geoLocId, function(err, user) {
+  User.addUser(req.body.name, req.params.geoLocId, req.body.email, function(err, user) {
     if (err)
       res.send(err);
     res.json(user);
@@ -44,6 +44,14 @@ exports.get_user_by_id = function (req, res) {
 
 exports.get_users_with_reviews = function (req, res) {
   User.getUsersWithReviews(function(err, user) {
+      if (err)
+        res.send(err);
+      res.json(user);
+  });
+};
+
+exports.get_user_by_name = function (req, res) {
+  User.getUserByName(req.body.name, function(err, user) {
       if (err)
         res.send(err);
       res.json(user);

@@ -14,24 +14,6 @@ User.createUser = function(newUser, result) {
     createModel("user", newUser, result);
 };
 
-User.addUser = function(name, email, geoLocId, result) {
-    sql.query(
-        {
-            sql: "INSERT INTO User(name, email, geoLocId) VALUES(name = ?, email = ?, geoLocId = ?)",
-            values: [name, email, geoLocId] 
-        },
-        function (err, res) {             
-            if(err) {
-                console.log("error: ", err);
-                result(err, null);
-            }
-            else{
-                result(null, res);
-            }
-        }
-    );
-}
-
 User.deleteUser = function(uid, result) {
     sql.query(
         {
@@ -53,7 +35,7 @@ User.deleteUser = function(uid, result) {
 User.editUser = function(uid, name, email, geoLocId, result) {
     sql.query(
         {
-            sql: "UPDATE user SET name = ?, email = ?, geoLocId = ? WHERE uid = ?",
+            sql: "UPDATE user SET name = ??, email = ??, geoLocId = ? WHERE uid = ?",
             values: [name, email, geoLocId, uid] 
         },
         function (err, res) {             
