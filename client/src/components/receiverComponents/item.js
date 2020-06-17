@@ -12,9 +12,9 @@ class Item extends Component { // props: pId
     }
 
     componentDidMount() {
-        fetch('/api/providerGoesTo/' + this.state.pId)// change this
+        fetch('/api/containsItem/' + this.props.orderId)// change this
             .then(res => res.json())
-            .then(trips => this.setState({ trips }, () => console.log('trips fetched...', trips)));
+            .then(orders => this.setState({ orders }, () => console.log('orders fetched...', orders)));
     }
 
     render() {
@@ -23,10 +23,10 @@ class Item extends Component { // props: pId
 
                 <Cell col={12}>
                     <div>
-                        Trips:
+                        Items:
                         {this.state.orders.map(function (o) {
                         return (
-                            <Link key={o.uid} to={{ pathname: '/items', state: { storeId: t.storeId, providerId: this.state.pId } }}>{t.storeId}</Link>
+                            <div>{o.itemId}</div>
                         )
                     }, this)}
 

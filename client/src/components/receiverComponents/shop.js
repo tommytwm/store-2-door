@@ -23,7 +23,7 @@ class Shop extends Component {
     componentDidMount() {
 
         const proxyurl = "https://cors-anywhere.herokuapp.com/";
-        fetch(proxyurl+'https://store-2-door.herokuapp.com/api/provider/')
+        fetch(proxyurl+'https://store-2-door.herokuapp.com/api/user/')
             .then(res => res.json())
             .then(providers => this.setState({ providers }, () => console.log('providers fetched...', providers)));
         fetch(proxyurl+ 'https://store-2-door.herokuapp.com/api/store/') 
@@ -48,7 +48,7 @@ class Shop extends Component {
                                 <ul style={{ listStyle: 'none' }}>
                                     {this.state.providers.map(provider =>
                                         <li key={provider.uid}>
-                                            <Link key={provider.uid} to={{ pathname: '/providers', state: { pId: provider.uid } }}>{provider.numDeliveries}</Link>
+                                            <Link key={provider.uid} to={{ pathname: '/providers', state: { pId: provider.uid, name: provider.name } }}>{provider.name}</Link>
                                         </li> 
                                         )}
                                 </ul>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Cell } from 'react-mdl';
-import Item from './items';
-// <Cell col={6}><Item orderId={o.requestId}></Item></Cell>
+import Item from './item';
+
 // show ORDER ID: item 1,2,3.... total price: xxx
 class Orders extends Component { // props: pId
     constructor(props) {
@@ -12,28 +12,31 @@ class Orders extends Component { // props: pId
     }
 
     componentDidMount() {
-        const proxyurl = "https://cors-anywhere.herokuapp.com/";
-        fetch(proxyurl+ 'https://store-2-door.herokuapp.com/api/providerGoesTo/' + this.state.pId)// change this
+        const proxyurl = "https://cors-anywhere.herokuapp.com/"; // note: using heroku server does not work 
+        fetch('api/orderRequest/by-receiver/' + sessionStorage.getItem('uId'))// change this
             .then(res => res.json())
-            .then(trips => this.setState({ trips }, () => console.log('trips fetched...', trips)));
+            .then(orders => this.setState({ orders }, () => console.log('orders fetched...', orders)));
     }
+    
+
 
     render() {
+        console.log(sessionStorage.getItem("uId"))
     return (
             <Grid>
-                <Cell col={4}>
-                    <h1>Orders:</h1>
+            <Cell col={4}>
+                <h2>Orders for :{sessionStorage.getItem("uId")}</h2>
 
                 </Cell>
 
-                <Cell col={12}>
+                <Cell col={8}>
                     <div>
-                        Trips:
-                        {this.state.trips.orders(function (o) {
+                        {this.state.orders.map(function (o) {
                             return (
                             <div>
-                                <Cell col={6}><h3>{o.requestId}</h3></Cell>
-                               
+                                    <Cell col={6}><h3>Order Request: {o.requestId}</h3></Cell>
+
+                                    <Cell col={6}><Item orderId={o.requestId}></Item></Cell>
                             </div>
                         )
                     }, this)}

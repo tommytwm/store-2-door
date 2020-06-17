@@ -42,6 +42,8 @@ class SignIn extends Component {
                 this.setState({isAuth: true});
                 console.log('Logged in...');
                 console.log('Welcome ' + json[0].name + '!');
+                sessionStorage.setItem("uId", json[0].uid);
+                alert("Welcome " + json[0].name);
             }
         });
     }

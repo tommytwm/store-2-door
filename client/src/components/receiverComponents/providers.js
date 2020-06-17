@@ -9,7 +9,8 @@ class Providers extends Component { // props: pId
         super(props);
         this.state = {
             pId: props.location.state.pId,
-            trips: []
+            trips: [],
+            store: {}
         };
     }
 
@@ -30,16 +31,17 @@ class Providers extends Component { // props: pId
         return (
             <Grid>
                 <Cell col={4}>
-                    <div>{this.props.location.state.pId}</div>
+                    <h2>Trips For</h2>
+                    <h1>{this.props.location.state.name}</h1>
 
                 </Cell>
 
-                <Cell col={12}>
+                <Cell col={8}>
                     <div>
-                        Trips:
+                        <h3>Trips:</h3>
                         {this.state.trips.map(function (t) {
                         return (
-                            <Link key={t.uid} to={{ pathname: '/items', state: { storeId: t.storeId, providerId: this.state.pId } }}>{t.storeId}</Link> 
+                            <Link key={t.uid} to={{ pathname: '/items', state: { storeId: t.storeId, providerId: this.props.location.state.name } }}>{t.storeId}</Link> 
                         )
                     }, this)}
 

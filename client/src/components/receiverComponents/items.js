@@ -19,7 +19,7 @@ class Items extends Component {
 
     componentDidMount() {
         const proxyurl = "https://cors-anywhere.herokuapp.com/";
-        fetch(proxyurl + 'https://store-2-door.herokuapp.com/api/item/')
+        fetch('/api/item/by-store/' + this.props.location.state.storeId)
             .then(res => res.json()) 
             .then(items => this.setState({ items }, () => console.log('items fetched...', items)));
         fetch(proxyurl+'https://store-2-door.herokuapp.com/api/store/' + this.props.location.state.storeId)
@@ -105,7 +105,7 @@ class Items extends Component {
                                         <div>
                                             <input onChange={this.onSelect}type="checkbox" id={item.itemId} name={item.name} value={item.itemId} />
                                             <label htmlFor={item.itemId}>{item.name}</label>
-                                            <h3>{item.price}</h3>
+                                            <h3>${item.price}</h3>
                                         </div>
                                     </li> 
                                     )}
