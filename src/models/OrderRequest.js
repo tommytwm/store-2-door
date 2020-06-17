@@ -12,10 +12,28 @@ OrderRequest.createOrderRequest = function(newOrderRequest, result) {
     createModel("orderrequest", newOrderRequest, result);
 };
 
+OrderRequest.deleteOrderRequest = function(requestId, result) {
+    sql.query(
+        {
+            sql: "DELETE FROM orderrequest WHERE requestId = ?",
+            values: [requestId] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+};
+
 OrderRequest.getOrderRequestById = function(requestId, result) {
     sql.query(
         {
-            sql: "SELECT * FROM orderrequest WHERE requestId = ?",
+            sql: "SELECT receiverId FROM orderrequest WHERE requestId = ?",
             values: [requestId] 
         },
         function (err, res) {             
