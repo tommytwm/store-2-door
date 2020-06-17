@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Grid, Cell } from 'react-mdl';
-import { Link } from 'react-router-dom';
 
 // fetch Item given ORDER REQUEST 
 class Item extends Component { // props: pId
@@ -14,7 +13,7 @@ class Item extends Component { // props: pId
     componentDidMount() {
         fetch('/api/containsItem/' + this.props.orderId)// change this
             .then(res => res.json())
-            .then(orders => this.setState({ orders }, () => console.log('orders fetched...', orders)));
+            .then(orders => this.setState({ orders }, () => console.log('items fetched...', orders)));
     }
 
     render() {

@@ -86,6 +86,43 @@ Rating.getRatingById = function(ratingId, result) {
     );
 };
 
+Rating.getRatingByUId = function (uid, result) {
+    sql.query(
+        {
+            sql: "SELECT * FROM rating WHERE uid = ?",
+            values: [uid]
+        },
+        function (err, res) {
+            if (err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else {
+                console.log("GETTING THEsqs RATES")
+                result(null, res);
+            }
+        }
+    );
+};
+
+Rating.getUsersWithRating = function(minRating, result) {
+    sql.query(
+        {
+            sql: "SELECT uid FROM rating WHERE ratingId >= ?",
+            values: [minRating]
+        },
+        function (err, res) {
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+};
+
 Rating.getAllRatings = function(result) {
     getAllModels("rating", result);
 };

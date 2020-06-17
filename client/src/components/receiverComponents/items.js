@@ -22,7 +22,7 @@ class Items extends Component {
         fetch('/api/item/by-store/' + this.props.location.state.storeId)
             .then(res => res.json()) 
             .then(items => this.setState({ items }, () => console.log('items fetched...', items)));
-        fetch(proxyurl+'https://store-2-door.herokuapp.com/api/store/' + this.props.location.state.storeId)
+        fetch('/api/store/' + this.props.location.state.storeId)
             .then(res => res.json()) 
             .then(r => r[0])
             .then(store => this.setState({ store }, () => console.log('store fetched...', store)));
