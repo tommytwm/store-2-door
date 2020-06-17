@@ -27,7 +27,7 @@ exports.get_contains_item_by_id = function (req, res) {
 };
 
 exports.get_contains_item_by_request_id = function (req, res) {
-  ContainsItem.getContainsItemById(req.params.requestId, function(err, containsItem) {
+  ContainsItem.getItemByRequestId(req.params.requestId, function(err, containsItem) {
       if (err)
         res.send(err);
       res.json(containsItem);

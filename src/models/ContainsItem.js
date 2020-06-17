@@ -48,10 +48,10 @@ ContainsItem.getContainsItemById = function(requestId, itemId, result) {
     );
 };
 
-ContainsItem.getItemByOrderRequest = function(requestId, result) {
+ContainsItem.getItemByRequestId = function(requestId, result) {
     sql.query(
         {
-            sql: "SELECT c.itemId, i.name, i.price FROM constainsItem c, item i WHERE c.requestId = ?",
+            sql: "SELECT c.itemId, i.name, i.price FROM containsItem c, item i WHERE c.requestId = ? AND c.itemId = i.itemId",
             values: [requestId] 
         },
         function (err, res) {             
