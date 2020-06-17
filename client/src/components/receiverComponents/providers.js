@@ -14,7 +14,7 @@ class Providers extends Component { // props: pId
     }
 
     componentDidMount() {
-        fetch('/api/providerGoesTo/'+this.state.pId)// change this
+        fetch('/api/providerGoesTo/'+ this.state.pId)// change this
             .then(res => res.json()) 
             .then(trips => this.setState({ trips }, () => console.log('trips fetched...', trips)));
     }
@@ -39,7 +39,7 @@ class Providers extends Component { // props: pId
                         Trips:
                         {this.state.trips.map(function (t) {
                         return (
-                            <Link key={t.uid} to={{ pathname: '/items', state: { storeId: t.storeId } }}>{t.storeId}</Link> 
+                            <Link key={t.uid} to={{ pathname: '/items', state: { storeId: t.storeId, providerId: this.state.pId } }}>{t.storeId}</Link> 
                         )
                     }, this)}
 

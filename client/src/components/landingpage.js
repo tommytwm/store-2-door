@@ -25,6 +25,7 @@ class Landing extends Component {
                             laborum.</h5>
 
                             <Link style={{ color: '#2F2B0E', fontSize: '2em' }} to={process.env.PUBLIC_URL + "/signin"} >Log In or Sign Up</Link>
+                            {sessionStorage.setItem("uId", 11)}
                         </div>
                         <br />
                     </Cell>

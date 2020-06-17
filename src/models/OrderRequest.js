@@ -30,6 +30,24 @@ OrderRequest.getOrderRequestById = function(requestId, result) {
     );
 };
 
+OrderRequest.getOrderRequestByReceiverId = function(receiverId, result) {
+    sql.query(
+        {
+            sql: "SELECT * FROM orderrequest WHERE receiverId = ?",
+            values: [receiverId] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+};
+
 OrderRequest.getAllOrderRequests = function(result) {
     getAllModels("orderrequest", result);
 };

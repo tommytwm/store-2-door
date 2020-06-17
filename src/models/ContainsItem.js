@@ -12,11 +12,47 @@ ContainsItem.createContainsItem = function(newContainsItem, result) {
     createModel("containsitem", newContainsItem, result);
 };
 
+ContainsItem.requestItem = function(requestId, itemId, result) {
+    sql.query(
+        {
+            sql: "INSERT INTO ContainsItem VALUES (requestId = ?, itemId = ?)",
+            values: [requestId, itemId] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+}
+
 ContainsItem.getContainsItemById = function(requestId, itemId, result) {
     sql.query(
         {
             sql: "SELECT * FROM containsitem WHERE (requestId = ? AND itemId = ?)",
             values: [requestId, itemId] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+};
+
+ContainsItem.getItemByOrderRequest = function(requestId, result) {
+    sql.query(
+        {
+            sql: "SELECT c.itemId, i.name, i.price FROM constainsItem c, item i WHERE c.requestId = ?",
+            values: [requestId] 
         },
         function (err, res) {             
             if(err) {

@@ -16,6 +16,24 @@ Item.createItem = function(newItem, result) {
     createModel("item", newItem, result);
 };
 
+Item.addItem = function(name, price, maxOrder, supplierId, storeId, result) {
+    sql.query(
+        {
+            sql: "INSERT INTO item(name, price, maxOrder, supplierId, storeId) VALUES (name = ?, price = ?, maxOrder = ?, supplierId = ?, storeId = ?)",
+            values: [name, price, maxOrder, supplierId, storeId] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+};
+
 Item.getItemById = function(itemId, result) {
     sql.query(
         {
@@ -34,10 +52,10 @@ Item.getItemById = function(itemId, result) {
     );
 };
 
-Item.getItemByStoreId = function (storeId, result) {
+Item.getItemsByStoreId = function (storeId, result) {
     sql.query(
         {
-            sql: "SELECT * FROM item WHERE itemId = ?",
+            sql: "SELECT * FROM item WHERE storeId = ?",
             values: [storeId]
         },
         function (err, res) {
@@ -51,6 +69,42 @@ Item.getItemByStoreId = function (storeId, result) {
         }
     );
 };
+
+Item.getItemsBySupplierId = function (supplierId, result) {
+    sql.query(
+        {
+            sql: "SELECT * FROM item WHERE supplierId = ?",
+            values: [supplierId]
+        },
+        function (err, res) {
+            if (err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else {
+                result(null, res);
+            }
+        }
+    );
+};
+
+Item.getItemsBelowPrice = function (price, result) {
+    sql.query(
+        {
+            sql: "SELECT * FROM item WHERE price <= ?",
+            values: [price]
+        },
+        function (err, res) {
+            if (err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else {
+                result(null, res);
+            }
+        }
+    );
+}
 
 Item.getAllItems = function(result) {
     getAllModels("item", result);

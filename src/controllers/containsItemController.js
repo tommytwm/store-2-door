@@ -10,12 +10,28 @@ exports.create_contains_item = function(req, res) {
     });
 };
 
+exports.request_item = function (req, res) {
+  ContainsItem.requestItem(req.params.body.requestId, req.params.body.itemId, function(err, containsItem) {
+    if (err)
+      res.send(err);
+    res.json(containsItem);
+});
+};
+
 exports.get_contains_item_by_id = function (req, res) {
     ContainsItem.getContainsItemById(req.params.requestId, req.params.itemId, function(err, containsItem) {
         if (err)
           res.send(err);
         res.json(containsItem);
     });
+};
+
+exports.get_contains_item_by_request_id = function (req, res) {
+  ContainsItem.getContainsItemById(req.params.requestId, function(err, containsItem) {
+      if (err)
+        res.send(err);
+      res.json(containsItem);
+  });
 };
 
 exports.get_all_contains_items = function (req, res) {
