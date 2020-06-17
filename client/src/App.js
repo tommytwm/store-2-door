@@ -8,11 +8,7 @@ import { Link } from 'react-router-dom';
 
 
 class App extends Component {
-
-
-
-
-render() {
+    render() {
         return (
             <div className="demo-big-content">
                 <Layout>
@@ -24,9 +20,8 @@ render() {
                             </div>
 
                         }
-
-
-                        scroll>
+                        scroll
+                    >
                         <Navigation>
                             <Link style={{ color: '#2F2B0E', fontSize: '1.35em' }} to={process.env.PUBLIC_URL + "/"}>Home</Link>
                             <Link style={{ color: '#2F2B0E', fontSize: '1.35em' }} to={process.env.PUBLIC_URL + "/shop"}>Shop</Link>
@@ -34,7 +29,7 @@ render() {
                             <Link style={{ color: '#2F2B0E', fontSize: '1.35em' }} to={process.env.PUBLIC_URL + "/signin"}>Sign In</Link>
                         </Navigation>
                     </Header>
-                    <Drawer style={{ fontFamily: 'Roboto Mono', color: '#2F2B0E' }} title={<Link to="/">josh</Link>}>
+                    <Drawer style={{ fontFamily: 'Roboto Mono', color: '#2F2B0E' }} title="Welcome">
                         <Navigation style={{ fontFamily: 'Roboto Mono' }}>
                             <Link to={process.env.PUBLIC_URL + "/"} >Home</Link>
                             <Link to={process.env.PUBLIC_URL + "/shop"} >Shop</Link>
