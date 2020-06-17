@@ -10,16 +10,16 @@ exports.create_provider_goes_to = function(req, res) {
     });
 };
 
-exports.get_provider_goes_to_by_id = function (req, res) {
-    ProviderGoesTo.getProviderGoesToById(req.params.uid, req.params.storeId, function(err, providerGoesTo) {
+exports.get_provider_goes_to_store_id = function (req, res) {
+    ProviderGoesTo.getProviderGoesToStoreId(req.params.uid, req.params.storeId, function(err, providerGoesTo) {
         if (err)
           res.send(err);
         res.json(providerGoesTo);
     });
 };
 
-exports.get_provider_goes_to_by_pid = function (req, res) {
-    ProviderGoesTo.getProviderGoesToByPId(req.params.uid, function (err, providerGoesTo) {
+exports.get_provider_id = function (req, res) {
+    ProviderGoesTo.getProviderId(req.params.uid, function (err, providerGoesTo) {
         if (err)
             res.send(err);
         res.json(providerGoesTo);
