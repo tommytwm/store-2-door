@@ -43,6 +43,7 @@ class Providers extends Component { // props: pId
                 <Cell col={8}>
                     <div>
                         <h3>Trips:</h3>
+                        <h5>Click On The Following Trips To Request An Order</h5>
                         {this.state.trips.map(function (t) {
                         return (
                             <Link key={t.uid} to={{ pathname: '/items', state: { storeId: t.storeId, providerId: this.props.location.state.name } }}>{t.name}</Link> 

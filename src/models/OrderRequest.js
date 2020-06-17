@@ -10,7 +10,21 @@ var OrderRequest = function(orderRequest) {
 
 OrderRequest.createOrderRequest = function(newOrderRequest, result) {
     createModel("orderrequest", newOrderRequest, result);
-
+    sql.query(
+        {
+            sql: "INSERT INTO acceptrequest VALUES (requestId = ?, (SELECT p.uid FROM provider p), 0)",
+            values: [newOrderRequest.requestId] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
 };
 
 OrderRequest.deleteOrderRequest = function(requestId, result) {
