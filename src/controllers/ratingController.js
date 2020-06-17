@@ -19,7 +19,7 @@ exports.add_rating = function (req, res) {
 };
 
 exports.delete_rating = function (req, res) {
-  Rating.deleteRating(req.params.uid, function(err, rating) {
+  Rating.deleteRating(req.params.ratingId, function(err, rating) {
       if (err)
         res.send(err);
       res.json(rating);
