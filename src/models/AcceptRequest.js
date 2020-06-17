@@ -52,7 +52,7 @@ AcceptRequest.getAcceptRequestByRequestId = function(requestId, result) {
 AcceptRequest.deleteAcceptedRequest = function(requestId, providerId, result) {
     sql.query(
         {
-            sql: "DELETE FROM acceptrequest WHERE (requestId = ? AND providerId = ?)",
+            sql: "DELETE FROM acceptrequest WHERE (requestId = ? AND providerId != ?)",
             values: [requestId, providerId] 
         },
         function (err, res) {             
