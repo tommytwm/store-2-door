@@ -53,7 +53,7 @@ Rating.deleteRating = function(ratingId, result) {
 Rating.getUsersWithRating = function(minRating, result) {
     sql.query(
         {
-            sql: "SELECT uid, rate FROM rating WHERE ratingId >= ?",
+            sql: "SELECT uid, rate FROM rating WHERE rate >= ?",
             values: [minRating]
         },
         function (err, res) {
