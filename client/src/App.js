@@ -26,7 +26,6 @@ class App extends Component {
                             <Link style={{ color: '#2F2B0E', fontSize: '1.35em' }} to={process.env.PUBLIC_URL + "/"}>Home</Link>
                             <Link style={{ color: '#2F2B0E', fontSize: '1.35em' }} to={process.env.PUBLIC_URL + "/shop"}>Shop</Link>
                             <Link style={{ color: '#2F2B0E', fontSize: '1.35em' }} to={process.env.PUBLIC_URL + "/orders"}>Orders</Link>
-                            <Link style={{ color: '#2F2B0E', fontSize: '1.35em' }} to={process.env.PUBLIC_URL + "/signin"}>Sign In</Link>
                         </Navigation>
                     </Header>
                     <Drawer style={{ fontFamily: 'Roboto Mono', color: '#2F2B0E' }} title="Welcome">
@@ -34,7 +33,6 @@ class App extends Component {
                             <Link to={process.env.PUBLIC_URL + "/"} >Home</Link>
                             <Link to={process.env.PUBLIC_URL + "/shop"} >Shop</Link>
                             <Link to={process.env.PUBLIC_URL + "/orders"}>Orders</Link>
-                            <Link to={process.env.PUBLIC_URL + "/signin"} >Sign In</Link>
                         </Navigation>
                     </Drawer>
                     <Content>
