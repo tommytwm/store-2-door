@@ -33,8 +33,8 @@ Receiver.orderRequest = function(requestId, receiverId, result) {
 Receiver.getReceiverById = function(receiverId, result) {
     sql.query(
         {
-            sql: "SELECT u.name, u.email, u.geoLocId, r.numOrders FROM user u, receiver r WHERE uid = ?",
-            values: [receiverId] 
+            sql: "SELECT u.name, u.email, u.geoLocId, r.numOrders FROM user u, receiver r WHERE u.uid = ? AND r.uid = ?",
+            values: [receiverId, receiverId] 
         },
         function (err, res) {             
             if(err) {

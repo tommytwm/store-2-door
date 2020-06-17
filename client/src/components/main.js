@@ -8,6 +8,7 @@ import Providers from './receiverComponents/providers';
 import SignIn from './signinpage';
 import Orders from './receiverComponents/orders';
 import Request from './providerComponents/request';
+import UserProfile from './userprofile';
 
 const Main = () => (
     <Switch>
@@ -19,6 +20,7 @@ const Main = () => (
         <Route path="/signin" component={SignIn} />
         <Route path="/orders" component={Orders} />
         <Route path="/request" component={Request} />
+        <Route path="/userprofile" component={UserProfile} />
     </Switch>
 )
 
