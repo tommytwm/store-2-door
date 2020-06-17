@@ -13,11 +13,83 @@ Store.createStore = function(newStore, result) {
     createModel("store", newStore, result);
 };
 
+Store.addStore = function(name, geoLocId, result) {
+    sql.query(
+        {
+            sql: "INSERT INTO store(name, geoLocId) VALUES (name = ?, geoLocId = ?)",
+            values: [name, geoLocId] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+};
+
+Store.editStore = function(storeId, name, geoLocId, result) {
+    sql.query(
+        {
+            sql: "UPDATE store SET name = ?, geoLocId = ? WHERE storeId = ?",
+            values: [name, geoLocId, storeId] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+}
+
+Store.deleteStore = function(storeId, result) {
+    sql.query(
+        {
+            sql: "DELETE FROM store WHERE storeId = ?",
+            values: [storeId] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+};
+
 Store.getStoreById = function(storeId, result) {
     sql.query(
         {
             sql: "SELECT * FROM store WHERE storeId = ?",
             values: [storeId] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+};
+
+Store.getStoreWithMinItems = function(num, result) {
+    sql.query(
+        {
+            sql: "SELECT * FROM store s WHERE EXISTS (SELECT COUNT(itemId) FROM item i WHERE i.storeId = s.storeId GROUP BY i.storeId HAVING COUNT(*) >= ?)",
+            values: [num] 
         },
         function (err, res) {             
             if(err) {
