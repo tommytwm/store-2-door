@@ -16,11 +16,11 @@ Item.createItem = function(newItem, result) {
     createModel("item", newItem, result);
 };
 
-Item.addItem = function(name, price, maxOrder, supplierId, storeId, result) {
+Item.deleteItem = function(itemId, result) {
     sql.query(
         {
-            sql: "INSERT INTO item(name, price, maxOrder, supplierId, storeId) VALUES (name = ?, price = ?, maxOrder = ?, supplierId = ?, storeId = ?)",
-            values: [name, price, maxOrder, supplierId, storeId] 
+            sql: "DELETE FROM item WHERE itemId = ?",
+            values: [itemId] 
         },
         function (err, res) {             
             if(err) {
