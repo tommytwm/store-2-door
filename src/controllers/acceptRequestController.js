@@ -20,6 +20,14 @@ exports.get_accept_request_by_id = function (req, res) {
 
 exports.get_accept_request_by_provider_id = function (req, res) {
   AcceptRequest.getAcceptRequestByProviderId(req.params.providerId, function(err, acceptRequest) {
+    if (err)
+        res.send(err);
+      res.json(acceptRequest);
+  });
+};
+
+exports.get_accept_request_by_requestId = function (req, res) {
+    AcceptRequest.getAcceptRequestByRequestId(req.params.requestId, function(err, acceptRequest) {
       if (err)
         res.send(err);
       res.json(acceptRequest);

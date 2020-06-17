@@ -67,6 +67,24 @@ AcceptRequest.updateAcceptRequest = function(requestId, providerId, result) {
     );
 };
 
+AcceptRequest.getAcceptRequestByRequestId = function(requestId, result) {
+    sql.query(
+        {
+            sql: "SELECT * FROM acceptrequest, user WHERE (requestId = ? AND providerId = uid)",
+            values: [requestId] 
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    );
+};
+
 AcceptRequest.deleteAcceptedRequest = function(requestId, providerId, result) {
     sql.query(
         {
