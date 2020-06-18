@@ -1,12 +1,26 @@
 var OrderRequest = require('../models/OrderRequest');
+var AcceptRequest = require('../models/AcceptRequest');
+var Provider = require('../models/Provider');
 
 exports.create_order_request = function(req, res) {
-    console.log(req.body);
-    var new_order_request = new OrderRequest(req.body);
-
-    OrderRequest.createOrderRequest(new_order_request, function(err, orderRequest) {
-        if (err)
+  console.log(req.body);
+    OrderRequest.createOrderRequest(req.body.receiverId, function(err, orderRequest) {
+        if (err) {
           res.send(err);
+        }
+
+        Provider.getAllProviders(function(err, providers) {
+          providers.forEach((provider) => {
+            const newAcceptRequest = {requestId: orderRequest.requestId,
+                                      providerId: provider.uid,
+                                      isAccepted: 0};
+            AcceptRequest.createAcceptRequest(newAcceptRequest, function(err, acceptRequest) {
+              if (err)
+                res.send(err);
+            });
+          });
+        });
+        
         res.json(orderRequest);
     });
 };
