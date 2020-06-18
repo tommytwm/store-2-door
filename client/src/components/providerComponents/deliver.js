@@ -38,6 +38,8 @@ class Deliver extends Component {
                                                             <Link key={request.requestId} to={{ pathname: '/request', state: { request: request } }}>{request.requestId}</Link>
                                                         </li>);
                                             }
+
+                                            return null;
                                         })
                                     }
                                 </ul>
@@ -61,6 +63,8 @@ class Deliver extends Component {
                                                             <Link key={request.requestId} to={{ pathname: '/request', state: { request: request } }}>{request.requestId}</Link>
                                                         </li>);
                                             }
+
+                                            return null;
                                         })
                                     }
                                 </ul>

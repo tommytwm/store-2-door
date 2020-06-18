@@ -15,15 +15,32 @@ class Orders extends Component { // props: pId
     }
 
     componentDidMount() {
-        const proxyurl = "https://cors-anywhere.herokuapp.com/"; // note: using heroku server does not work 
-        fetch('api/orderRequest/by-receiver/' + sessionStorage.getItem('uId'))// change this
+        fetch('api/orderRequest/receiver/' + sessionStorage.getItem('uId'))
             .then(res => res.json())
             .then(orders => this.setState({ orders }, () => console.log('orders fetched...', orders)));
     }
-    
+
+    deleteOrder(event) {
+        event.preventDefault();
+        event.persist()
+        console.log(event.target.value)
+        fetch('/api/orderRequest/' + event.target.value, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                
+            })
+        })
+            .then(response => response.json())
+            .then(data => alert("Deleted Order " + event.target.value))
+    }
 
 
     render() {
+        console.log(this.state.orders)
     return (
             <Grid>
             <Cell col={4}>
@@ -33,11 +50,16 @@ class Orders extends Component { // props: pId
 
                 <Cell col={8}>
                     <div>
-                        {this.state.orders.map(function (o) {
+                        {this.state.orders.map(function (o,i) {
                             return (
-                            <div className="header-color">
-                                    <Cell col={6}><h3>Order Request: {o.requestId}</h3>
+                                <div key={i}className="header-color">
+                                    <Cell col={6}>
+                                        <form onSubmit={this.deleteOrder}>
+                                            <button onClick={this.deleteOrder} value={o.requestId} type="submit">Delete This Order</button>
+                                        </form>
+                                        <h3>Order Request: {o.requestId}</h3>
                                         <OrderInformation requestId={o.requestId} />
+                                        <h3>The total for this order is: ${Math.round((o.totalprice + Number.EPSILON) * 100) / 100}</h3>
                                     </Cell>
 
                                     <Cell col={6}><Item orderId={o.requestId}></Item></Cell>

@@ -9,6 +9,7 @@ import '../../App.css';
         // given the provider and store, it should take you to the items page where items can be selected and added to the cart
 
 // user scenario 2: click on store, it will bring you to items page, then can add items to orderRequest
+// BUG: won't show providers if they have no rating
 
 // TODO: show AVG of the providers
 class Shop extends Component {
@@ -16,19 +17,21 @@ class Shop extends Component {
         super();
         this.state = {
             providers: [],
-            stores:[]
+            stores: [],
+            organicstores: []
         };
     }
 
     componentDidMount() {
-
-        const proxyurl = "https://cors-anywhere.herokuapp.com/";
-        fetch(proxyurl+'https://store-2-door.herokuapp.com/api/user/')
+        fetch('/api/provider/profiles/')
             .then(res => res.json())
             .then(providers => this.setState({ providers }, () => console.log('providers fetched...', providers)));
-        fetch(proxyurl+ 'https://store-2-door.herokuapp.com/api/store/') 
+        fetch('api/store/') 
             .then(res => res.json()) 
-            .then(stores => this.setState({ stores }, () => console.log('users fetched...', stores)));
+            .then(stores => this.setState({ stores }, () => console.log('stores fetched...', stores)));
+        fetch('api/store/organics/')
+            .then(res => res.json())
+            .then(organicstores => this.setState({ organicstores }, () => console.log('organic stores fetched...', organicstores)));
     }
 
            
@@ -48,7 +51,7 @@ class Shop extends Component {
                                 <ul style={{ listStyle: 'none' }}>
                                     {this.state.providers.map(provider =>
                                         <li key={provider.uid}>
-                                            <Link key={provider.uid} to={{ pathname: '/providers', state: { pId: provider.uid, name: provider.name } }}>{provider.name}</Link>
+                                            <h5>Average Rating: {Math.round((provider.avgrate + Number.EPSILON) * 100) / 100}</h5><Link key={provider.uid} to={{ pathname: '/providers', state: { pId: provider.uid, name: provider.name } }}>{provider.name}</Link>
                                         </li> 
                                         )}
                                 </ul>
@@ -65,7 +68,7 @@ class Shop extends Component {
 
                             {this.state.stores.map(function (s, i) {
                                 return (
-                                    <Cell className= "mdl-cell--4-col" col={4}>
+                                    <Cell key= { i } className= "mdl-cell--4-col" col={4}>
                                         <Link key={i} to={{ pathname: '/items', state: { storeId: s.storeId } }}>{s.name}</Link> 
                                     </Cell>
                                 )
@@ -73,7 +76,20 @@ class Shop extends Component {
                         </Grid>
 
                     </div>
-                        
+                        <div>
+                            <h3>Available Stores That Sell All Of The Organic Items</h3>
+                            <Grid className="demo-grid-3">
+
+                                {this.state.organicstores.map(function (s, i) {
+                                    return (
+                                        <Cell key={i} className="mdl-cell--4-col" col={4}>
+                                            <Link key={i} to={{ pathname: '/items', state: { storeId: s.storeId } }}>{s.name}</Link>
+                                        </Cell>
+                                    )
+                                }, this)}
+                            </Grid>
+
+                        </div>   
 
                     </Cell>
                 </Grid>

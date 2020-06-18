@@ -1,6 +1,7 @@
 var OrderRequest = require('../models/OrderRequest');
 
 exports.create_order_request = function(req, res) {
+    console.log(req.body);
     var new_order_request = new OrderRequest(req.body);
 
     OrderRequest.createOrderRequest(new_order_request, function(err, orderRequest) {

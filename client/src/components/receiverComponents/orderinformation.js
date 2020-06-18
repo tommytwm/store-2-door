@@ -14,7 +14,7 @@ class OrderInformation extends Component { // props: pId
     }
 
     componentDidMount() {
-        fetch('api/acceptRequest/' + this.props.requestId)// change this
+        fetch('api/acceptRequest/request/' + this.props.requestId)// change this
             .then(res => res.json())
             .then(requests => this.setState({ requests }, () => console.log('requests fetched...', requests)));
     }

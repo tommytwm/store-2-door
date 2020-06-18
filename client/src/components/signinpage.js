@@ -43,7 +43,7 @@ class SignIn extends Component {
                 console.log('Logged in...');
                 console.log('Welcome ' + json[0].name + '!');
                 sessionStorage.setItem("uId", json[0].uid);
-                sessionStorage.setItem("name", json[0].names);
+                sessionStorage.setItem("name", json[0].name);
                 alert("Welcome " + json[0].name);
             }
         });

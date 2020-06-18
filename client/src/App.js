@@ -5,6 +5,8 @@ import Main from './components/main';
 import 'react-mdl/extra/material.css';
 import 'react-mdl/extra/material.js';
 import { Link } from 'react-router-dom';
+import {IconContext} from 'react-icons';
+import { FaUserCircle } from 'react-icons/fa';
 
 
 class App extends Component {
@@ -27,6 +29,13 @@ class App extends Component {
                             <Link style={{ color: '#2F2B0E', fontSize: '1.35em' }} to={process.env.PUBLIC_URL + "/shop"}>Shop</Link>
                             <Link style={{ color: '#2F2B0E', fontSize: '1.35em' }} to={process.env.PUBLIC_URL + "/deliver"}>Deliver</Link>
                             <Link style={{ color: '#2F2B0E', fontSize: '1.35em' }} to={process.env.PUBLIC_URL + "/orders"}>Orders</Link>
+                            <Link style={{ color: '#2F2B0E', fontSize: '1.35em' }} to={process.env.PUBLIC_URL + "/userprofile"}>
+                                <IconContext.Provider value={{ color: "white" }}>
+                                <div>
+                                    <FaUserCircle />
+                                </div>
+                                </IconContext.Provider>
+                            </Link>
                         </Navigation>
                     </Header>
                     <Drawer style={{ fontFamily: 'Roboto Mono', color: '#2F2B0E' }} title="Welcome">
@@ -34,7 +43,7 @@ class App extends Component {
                             <Link to={process.env.PUBLIC_URL + "/"} >Home</Link>
                             <Link to={process.env.PUBLIC_URL + "/shop"} >Shop</Link>
                             <Link to={process.env.PUBLIC_URL + "/deliver"} >Deliver</Link>
-                            <Link to={process.env.PUBLIC_URL + "/orders"}>Orders</Link>
+                            <Link to={process.env.PUBLIC_URL + "/orders"} >Orders</Link>
                         </Navigation>
                     </Drawer>
                     <Content>
@@ -45,8 +54,8 @@ class App extends Component {
                     <Footer className="header-color" size="mini">
                         <FooterSection type="left" logo="Store 2 Door">
                             <FooterLinkList style={{color:'black'}}>
-                                <a href="#">Help</a>
-                                <a href="#">Privacy & Terms</a>
+                                <div>Help</div>
+                                <div>Privacy & Terms</div>
                             </FooterLinkList>
                         </FooterSection>
                     </Footer>

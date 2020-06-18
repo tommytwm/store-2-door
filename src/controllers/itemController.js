@@ -10,8 +10,8 @@ exports.create_item = function(req, res) {
     });
 };
 
-exports.add_item = function(req, res) {
-    Item.addItem(req.body.name, req.body.price, req.body.maxOrder, req.param.supplierId, req.param.storeId, function(err,item) {
+exports.delete_item = function (req, res) {
+    Item.deleteItem(req.params.itemId, function(err, item) {
         if (err)
           res.send(err);
         res.json(item);

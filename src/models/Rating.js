@@ -50,7 +50,7 @@ Rating.deleteRating = function(ratingId, result) {
     );
 };
 
-Rating.getUsersWithRating = function(minRating, result) {
+Rating.getUsersWithMinRating = function(minRating, result) {
     sql.query(
         {
             sql: "SELECT uid, rate FROM rating WHERE rate >= ?",
@@ -86,18 +86,19 @@ Rating.getRatingById = function(ratingId, result) {
     );
 };
 
-Rating.getUsersWithRating = function(minRating, result) {
+Rating.getRatingByUid = function (uid, result) {
     sql.query(
         {
-            sql: "SELECT uid FROM rate WHERE ratingId >= ?",
-            values: [minRating]
+            sql: "SELECT * FROM rating WHERE uid = ?",
+            values: [uid]
         },
         function (err, res) {
-            if(err) {
+            if (err) {
                 console.log("error: ", err);
                 result(err, null);
             }
-            else{
+            else {
+                console.log("GETTING THEsqs RATES")
                 result(null, res);
             }
         }
