@@ -10,7 +10,7 @@ var OrderRequest = function(orderRequest) {
 OrderRequest.createOrderRequest = function(receiverId, result) {
     sql.query(
         {
-            sql: "INSERT INTO orderRequest (requestId, receiverId) VALUES (requestId = 99999, receiverId = ?)",
+            sql: "INSERT INTO orderRequest (receiverId) VALUES (?)",
             values: [receiverId] 
         },
         function (err, res) {
