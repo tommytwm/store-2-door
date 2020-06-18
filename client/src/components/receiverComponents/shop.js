@@ -26,7 +26,7 @@ class Shop extends Component {
         fetch('/api/provider/profiles/')
             .then(res => res.json())
             .then(providers => this.setState({ providers }, () => console.log('providers fetched...', providers)));
-        fetch('api/store/') 
+        fetch('api/store/without-geoloc') 
             .then(res => res.json()) 
             .then(stores => this.setState({ stores }, () => console.log('stores fetched...', stores)));
         fetch('api/store/organics/')
