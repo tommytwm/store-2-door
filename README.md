@@ -26,3 +26,10 @@ Database is hosted on Heroku via ClearDB addon with NodeJS & Express JS, and Rea
 ### Adding to DB manually:
 We are using Heroku as our hosting service to store and manage our database via MYSQL. To manually connect and contribute to the database, connect to the MYSQL server (credentials can be found in the config file(s)): `mysql --host={HOSTNAME} --user={USERNAME} --password={PASSWORD} --reconnect {DB}`
 You should now be able to enter SQL commands and contribute to the database.
+
+### Deploying the repo to Heroku
+For any major changes that affects the structural integrity connecting the database with the back-end (API endpoints and functionalities for example) make sure to follow this deployment process:
+1. Create a pull request from your personal branch to master branch.
+2. Get another developer to review your pull request. Make changes if necessary.
+3. Approve the pull request and merge into master.
+4. On terminal, enter the script `git push heroku master` to deploy the update master branch code to heroku
