@@ -16,8 +16,8 @@ Provider.createProvider = function(newProvider, result) {
 Provider.getProviderById = function (providerId, result) {
     sql.query(
         {
-            sql: "SELECT u.name, u.email, u.geoLocId, p.numDeliveries FROM provider WHERE uid = ?",
-            values: [providerId] 
+            sql: "SELECT u.name, u.email, u.geoLocId, p.numDeliveries FROM provider p, user u WHERE u.uid = ? AND p.uid = ?",
+            values: [providerId, providerId] 
         },
         function (err, res) {             
             if(err) {

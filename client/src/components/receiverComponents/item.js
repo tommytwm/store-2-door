@@ -23,9 +23,9 @@ class Item extends Component { // props: pId
                 <Cell col={12}>
                     <div>
                         <h3>Items:</h3>
-                        {this.state.orders.map(function (o) {
-                        return (
-                            <div>{o.name}</div>
+                        {this.state.orders.map(function (o, i) {
+                            return (
+                                <div key={i}>{o.name}</div>
                         )
                     }, this)}
 
