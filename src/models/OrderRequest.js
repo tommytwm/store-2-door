@@ -1,6 +1,5 @@
 var sql = require('../controllers/databaseController');
 const QueryUtils = require('../utils/QueryUtils');
-const createModel = QueryUtils.createModel;
 const getAllModels = QueryUtils.getAllModels;
 
 var OrderRequest = function(orderRequest) {
@@ -8,20 +7,19 @@ var OrderRequest = function(orderRequest) {
     this.receiverId = orderRequest.receiverId;
 }
 
-OrderRequest.createOrderRequest = function(newOrderRequest, result) {
-    createModel("orderrequest", newOrderRequest, result);
+OrderRequest.createOrderRequest = function(receiverId, result) {
     sql.query(
         {
-            sql: "INSERT INTO acceptrequest VALUES (requestId = ?, (SELECT p.uid FROM provider p), 0)",
-            values: [newOrderRequest.requestId] 
+            sql: "INSERT INTO orderRequest (receiverId) VALUES (?)",
+            values: [receiverId] 
         },
-        function (err, res) {             
+        function (err, res) {
             if(err) {
                 console.log("error: ", err);
                 result(err, null);
             }
             else{
-                result(null, res);
+                result(null, res.insertId);
             }
         }
     );

@@ -54,8 +54,8 @@ class App extends Component {
                     <Footer className="header-color" size="mini">
                         <FooterSection type="left" logo="Store 2 Door">
                             <FooterLinkList style={{color:'black'}}>
-                                <div>Help</div>
-                                <div>Privacy & Terms</div>
+                                <text>Help</text>
+                                <text>Privacy & Terms</text>
                             </FooterLinkList>
                         </FooterSection>
                     </Footer>
