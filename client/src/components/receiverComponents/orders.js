@@ -50,9 +50,9 @@ class Orders extends Component { // props: pId
 
                 <Cell col={8}>
                     <div>
-                        {this.state.orders.map(function (o) {
+                        {this.state.orders.map(function (o,i) {
                             return (
-                            <div className="header-color">
+                                <div key={i}className="header-color">
                                     <Cell col={6}>
                                         <form onSubmit={this.deleteOrder}>
                                             <button onClick={this.deleteOrder} value={o.requestId} type="submit">Delete This Order</button>
