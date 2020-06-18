@@ -61,7 +61,6 @@ class Ratings extends Component {
 
                 <Cell col={12}>
                     <div>
-
                         {this.state.ratings.map((r,i) =>
                             <div key={i}>
                                 <h5>{r.rate}</h5>

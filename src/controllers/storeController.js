@@ -57,3 +57,11 @@ exports.get_all_stores = function (req, res) {
         res.json(store);
     });
 };
+
+exports.get_all_stores_without_geoloc = function (req, res) {
+  Store.getAllStoresWithoutGeoLoc(function(err, store) {
+    if (err)
+      res.send(err);
+    res.json(store);
+  });
+}

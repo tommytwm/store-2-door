@@ -108,4 +108,21 @@ Store.getAllStores = function (result) {
     getAllModels("store", result);
 };
 
+Store.getAllStoresWithoutGeoLoc = function (result) {
+    sql.query(
+        {
+            sql: "SELECT storeId, name FROM store"
+        },
+        function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+            }
+        }
+    ); 
+};
+
 module.exports = Store;
