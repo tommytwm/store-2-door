@@ -1,0 +1,345 @@
+CREATE TABLE Supplier (
+    supplierId int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name varchar(64) NOT NULL,
+    rating float
+);
+
+CREATE TABLE GeoLocation (
+    geoLocId int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    latitude double,
+    longitude double
+);
+
+CREATE TABLE Admin (
+    adminId int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name varchar(64)
+);
+
+CREATE TABLE User (
+    uid int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name varchar(64),
+    geoLocId int(11),
+    email varchar(64),
+    FOREIGN KEY (geoLocId) REFERENCES GeoLocation(geoLocId) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Provider (
+    uid int(11) PRIMARY KEY,
+    numDeliveries int,
+    FOREIGN KEY (uid) REFERENCES User(uid) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Receiver (
+    uid int(11) PRIMARY KEY,
+    numOrders int,
+    FOREIGN KEY (uid) REFERENCES User(uid) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Rating (
+    ratingId int(11) NOT NULL AUTO_INCREMENT,
+    rate float,
+    comment varchar(255),
+    uid int(11),
+    PRIMARY KEY (ratingId, uid),
+    FOREIGN KEY (uid) REFERENCES User(uid) ON DELETE CASCADE ON UPDATE CASCADE 
+);
+
+CREATE TABLE Store (
+    storeId int(11) NOT NULL AUTO_INCREMENT,
+    name varchar(64),
+    geoLocId int(11),
+    PRIMARY KEY (storeId, geoLocId),
+    FOREIGN KEY (geoLocId) REFERENCES GeoLocation(geoLocId) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Item (
+    itemId int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name varchar(64),
+    price double,
+    maxOrder int,
+    supplierId int(11),
+    storeId int(11),
+    FOREIGN KEY (supplierId) REFERENCES Supplier(supplierId) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (storeId) REFERENCES Store(storeId) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE OrderRequest (
+    requestId int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    receiverId int(11),
+    FOREIGN KEY (receiverId) REFERENCES Receiver(uid) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE AcceptRequest (
+    requestId int(11),
+    providerId int(11),
+    isAccepted bool,
+    PRIMARY KEY (requestId, providerId),
+    FOREIGN KEY (requestId) REFERENCES OrderRequest(requestId) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (providerId) REFERENCES Provider(uid) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE AdminMonitors (
+    adminId int(11),
+    requestId int(11) PRIMARY KEY,
+    providerId int(11),
+    FOREIGN KEY (adminId) REFERENCES Admin(adminId) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (requestId) REFERENCES AcceptRequest(requestId) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (providerId) REFERENCES AcceptRequest(providerId) ON DELETE CASCADE ON UPDATE CASCADE,
+);
+
+CREATE TABLE ContainsItem (
+    requestId int(11),
+    itemId int(11),
+    PRIMARY KEY (requestId, itemId),
+    FOREIGN KEY (requestId) REFERENCES OrderRequest(requestId) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (itemId) REFERENCES Item(itemId) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE ProviderGoesTo (
+    uid int(11),
+    storeId int(11),
+    PRIMARY KEY (uid, storeId),
+    FOREIGN KEY (uid) REFERENCES Provider(uid) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (storeId) REFERENCES Store(storeId) ON DELTE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO Supplier(name, rating) VALUES
+    ("Noname", 4.3),
+    ("President's Choice", 4),
+    ("365 Everyday Value", 4.2),
+    ("T&T", 4.5),
+    ("Kellogg's", 3.8),
+    ("Popeye's", 3.9),
+    ("Farmer's Market", 3.9),
+    ("Dole", 3.5),
+    ("Colgate", 3.6),
+    ("Tide", 3.7),
+    ("Aveeno", 4.2),
+    ("Johnson & Johnson", 4.1),
+    ("Wonder", 3.2),
+    ("Miss Vickies", 3.8),
+    ("49th Parallel Coffee Roasters", 4.2),
+    ("Advil", 4.2),
+    ("Life Brand", 3.7),
+    ("Olympic", 4.3),
+    ("Deciem", 4.5);
+
+INSERT INTO GeoLocation(latitude, longitude) VALUES
+    (49.279064, -123.111046),
+    (49.267756, -123.108139),
+    (49.270283, -123.154246),
+    (49.230406, -123.144871),
+    (49.223007, -123.134049),
+    (49.149657, -123.130923),
+    (49.126382, -123.164424),
+    (49.086487, -123.071),
+    (49.15078, -122.908102),
+    (49.280572, -122.786902),
+    (49.262842, -123.111722),
+    (49.263699, -123.115203),
+    (49.264686, -123.114462),
+    (49.263503, -123.123419),
+    (49.265065, -123.114282),
+    (49.262639, -123.099621);
+
+INSERT INTO Admin(name) VALUES
+    ("Alexander Grant"),
+    ("Jacob Brock"),
+    ("Michelle Adams"),
+    ("Amery Lockwood"),
+    ("Amy Wong"),
+    ("Jacquelin K."),
+    ("Jacky Ong"),
+    ("Omar Mohammed");
+
+INSERT INTO User(name, geoLocId, email) VALUES
+    ("Morty Sanchez", 1, "msanchez@sanchezz.com"),
+    ("April Morgan", 11, "aprilmorgan@omail.com"),
+    ("Horatio Music", 21, "mhoratio@music.com"),
+    ("Frank Smith", 31, "smithfrank@fakeemail.com"),
+    ("Melissa Brandy", 41, "melissa887@famousbrands.com"),
+    ("Elisa Jay", 51, "ElisaJaycobs@live.com"),
+    ("Samuel Ung", 61, "eung99@fancyemail.com"),
+    ("Karen Annabelle", 71, "karenanna@managers.com"),
+    ("Mohammed Ashud", 81, "ashudmohamed@canadacomputers.co"),
+    ("Damien Ong", 91, "dong1991@tester.com"),
+    ("Darren Fong", 101, "darrenfong@music.com"),
+    ("Emily Ashley", 111, "ashleyemily@realemail.com"),
+    ("Tommy Biscuit", 121, "tommybiscuit@realemail.com"),
+    ("Francesco Freno", 131, "ffreno@providers.com"),
+    ("Michael Jordan", 141, "notmichaeljordan@basketball.com"),
+    ("Irene Smith", 151, "smithirene@providers.com");
+
+INSERT INTO Provider VALUES
+    (101, 1),
+    (111, 2),
+    (121, 1),
+    (131, 0),
+    (141, 0),
+    (151, 2);
+
+INSERT INTO Receiver VALUES
+    (1, 1),
+    (11, 4),
+    (21, 3),
+    (31, 0),
+    (41, 0),
+    (51, 2),
+    (61, 3),
+    (71, 1),
+    (81, 0),
+    (91, 1);
+
+INSERT INTO Rating(rate, comment, uid) VALUES
+    (3.5, "A peculiar customer that tips well. Don't mind his words.", 1),
+    (4, "He is nice, but don't touch him.", 1),
+    (3.8, "April is a pleasant customer that I'd be glad to help again.", 11),
+    (5, "Great tipper!", 11),
+    (4.2, "You can hear him singing from outside his house!", 21),
+    (4.5, "He thanked me for the trip and let me pet his dog.", 31),
+    (5, "Nice young lady to help!", 41),
+    (2.3, "She asked to speak to the manager because I was 5 minutes late.", 71),
+    (4.2, "Very pleasant young man!", 81),
+    (5, "Kept me updated every 10 minutes. Amazing lad.", 101),
+    (5, "Called me to let me know she dropped off the things. Very sweet!", 111),
+    (4, "Mr. Biscuit was nice.", 121),
+    (3, "A bit late upon arrival", 141),
+    (4, "Great delivery Service", 131),
+    (4, "Irene delivered in time.", 151),
+    (5, "Irene was such a sweet girl! We texted me alternatives since she couldn't find what I need!", 151),
+    (5, "Ms. Smith is an absolute dear by keeping me updated on her trip. I would recommend her to anyone.", 151);
+
+INSERT INTO Store(name, geoLocod) VALUES
+    ("Joti's No Frills", 101),
+    ("Whole Foods Market", 111),
+    ("Save On Foods", 121),
+    ("Shoppers Drug Mart", 131),
+    ("Canadian Tire", 141),
+    ("Nesters Market"), 151);
+
+INSERT INTO Item(name, price, maxOrder, supplierId, storeId) VALUES
+    ("Kitchen Garbage Bags", 5.99, 3, 1, 1),
+    ("Kitchen Garbage Bags", 5.99, 3, 1, 21),
+    ("Kitchen Garbage Bags", 5.99, 3, 1, 31),
+    ("Kitchen Garbage Bags", 5.99, 3, 1, 51),
+    ("Long Grain White Rice (900g)", 2.47, 3, 1, 1),
+    ("Long Grain White Rice (900g)", 2.47, 3, 1, 21),
+    ("Long Grain White Rice (900g)", 2.47, 3, 1, 31),
+    ("Grade A Extra Large Eggs", 3.17, 2, 1, 1),
+    ("Grade A Extra Large Eggs", 3.17, 2, 1, 21),
+    ("Grade A Extra Large Eggs", 3.17, 2, 1, 31),
+    ("Vegetable Oil (946ml)", 3, 2, 1, 1),
+    ("Vegetable Oil (946ml)", 3, 2, 1, 21),
+    ("Vegetable Oil (946ml)", 3, 2, 1, 31),
+    ("Sea Salt And Malt Vinegar Flavour Kettle Cooked Potato Chips", 1.97, 3, 11, 1),
+    ("Sea Salt And Malt Vinegar Flavour Kettle Cooked Potato Chips", 1.97, 3, 11, 21),
+    ("Sea Salt And Malt Vinegar Flavour Kettle Cooked Potato Chips", 1.97, 3, 11, 31),
+    ("Sea Salt And Malt Vinegar Flavour Kettle Cooked Potato Chips", 1.97, 3, 11, 51),
+    ("Bacon", 5.99, 2, 11, 1),
+    ("Bacon", 5.99, 2, 11, 21),
+    ("Bacon", 5.99, 2, 11, 51),
+    ("Bacon", 5.99, 2, 11, 31),
+    ("Organic Coconut Milk (13.5 oz)", 3.39, 2, 21, 11),
+    ("Organic Coconut Milk (13.5 oz)", 3.39, 2, 21, 51),
+    ("Organic Unsweetened Almond Milk (32 oz)", 2.69, 2, 21, 51),
+    ("Organic Unsweetened Almond Milk (32 oz)", 2.69, 2, 21, 11),
+    ("Organic Crunchy Peanut Butter (500 g)", 3.79, 2, 21, 11),
+    ("Organic Crunchy Peanut Butter (500 g)", 3.79, 2, 21, 51),
+    ("Organic Black Beans (410 g)", 2.69, 3, 21, 51),
+    ("Organic Black Beans (410 g)", 2.69, 3, 21, 11),
+    ("Frozen Green Onion Pancake", 4.69, 2, 31, 1),
+    ("Frozen Green Onion Pancake", 4.69, 2, 31, 21),
+    ("Frozen Pork & Leek Dumpling", 8.69, 2, 31, 1),
+    ("Frozen Pork & Leek Dumpling", 8.69, 2, 31, 21),
+    ("Corn Flakes Cereal (760 g)", 6.47, 2, 41, 1),
+    ("Corn Flakes Cereal (760 g)", 6.47, 2, 41, 11),
+    ("Corn Flakes Cereal (760 g)", 6.47, 2, 41, 21),
+    ("Corn Flakes Cereal (760 g)", 6.47, 2, 41, 31),
+    ("Corn Flakes Cereal (760 g)", 6.47, 2, 41, 51),
+    ("Baby Spinach (1 kg)", 7.99, 1, 51, 1),
+    ("Baby Spinach (1 kg)", 7.99, 1, 51, 11),
+    ("Baby Spinach (1 kg)", 7.99, 1, 51, 21),
+    ("Baby Spinach (1 kg)", 7.99, 1, 51, 31),
+    ("Baby Spinach (1 kg)", 7.99, 1, 51, 51),
+    ("Vined Roma Tomatoes", 6.49, 1, 61, 1),
+    ("Vined Roma Tomatoes", 6.49, 1, 61, 21),
+    ("Vined Roma Tomatoes", 6.49, 1, 61, 51),
+    ("Pineapple Slices in Pineapple Juice", 2, 4, 71, 1),
+    ("Pineapple Slices in Pineapple Juice", 2, 4, 71, 11),
+    ("Pineapple Slices in Pineapple Juice", 2, 4, 71, 21),
+    ("Pineapple Slices in Pineapple Juice", 2, 4, 71, 31),
+    ("Pineapple Slices in Pineapple Juice", 2, 4, 71, 51),
+    ("Caesar Salad Kit (216 g)", 3.97, 2, 71, 1),
+    ("Caesar Salad Kit (216 g)", 3.97, 2, 71, 21),
+    ("Fluoride Toothpaste, Cavity Protection", 1.50, 2, 81, 1),
+    ("Fluoride Toothpaste, Cavity Protection", 1.50, 2, 81, 11),
+    ("Fluoride Toothpaste, Cavity Protection", 1.50, 2, 81, 21),
+    ("Fluoride Toothpaste, Cavity Protection", 1.50, 2, 81, 31),
+    ("Fluoride Toothpaste, Cavity Protection", 1.50, 2, 81, 41),
+    ("Fluoride Toothpaste, Cavity Protection", 1.50, 2, 81, 51),
+    ("Extra Clean Toothbrush, Soft", 2, 2, 81, 1),
+    ("Extra Clean Toothbrush, Soft", 2, 2, 81, 11),
+    ("Extra Clean Toothbrush, Soft", 2, 2, 81, 21),
+    ("Extra Clean Toothbrush, Soft", 2, 2, 81, 31),
+    ("Extra Clean Toothbrush, Soft", 2, 2, 81, 41),
+    ("Extra Clean Toothbrush, Soft", 2, 2, 81, 51),
+    ("Epic Espresso (12 oz)", 18, 2, 141, 11),
+    ("Epic Espresso (12 oz)", 18, 2, 141, 21),
+    ("Old School Espresso (12 oz)", 18, 2, 141, 11),
+    ("Old School Espresso (12 oz)", 18, 2, 141, 21),
+    ("Organic French Roast (12 oz)", 18, 2, 141, 11),
+    ("Organic French Roast (12 oz)", 18, 2, 141, 21),
+    ("Ibuprofen", 12.99, 1, 161, 1),
+    ("Ibuprofen", 12.99, 1, 161, 11),
+    ("Ibuprofen", 12.99, 1, 161, 21),
+    ("Ibuprofen", 12.99, 1, 161, 31),
+    ("Ibuprofen", 12.99, 1, 161, 41),
+    ("Ibuprofen", 12.99, 1, 161, 51),
+    ("Desloratadine Allgery Control Tablets (50 tablets)", 29.99, 1, 161, 1),
+    ("Desloratadine Allgery Control Tablets (50 tablets)", 29.99, 1, 161, 11),
+    ("Desloratadine Allgery Control Tablets (50 tablets)", 29.99, 1, 161, 21),
+    ("Desloratadine Allgery Control Tablets (50 tablets)", 29.99, 1, 161, 31),
+    ("Organic Yoghurt Plain 3.5%", 3.97, 2, 171, 1),
+    ("Organic Yoghurt Plain 3.5%", 3.97, 2, 171, 11),
+    ("Organic Yoghurt Plain 3.5%", 3.97, 2, 171, 21),
+    ("Organic Yoghurt Plain 3.5%", 3.97, 2, 171, 31),
+    ("Organic Yoghurt Plain 3.5%", 3.97, 2, 171, 51),
+    ("Natural Moisturizing Factors + HA (100 ml)", 7.70, 2, 181, 11);
+
+INSERT INTO OrderRequest(receiverId) VALUES
+    (1),
+    (21),
+    (41),
+    (71),
+    (81),
+    (91);
+
+INSERT INTO AcceptRequest VALUES
+    (21, 131, 1),
+    (31, 101, 1),
+    (41, 141, 1),
+    (51, 151, 1);
+
+INSERT INTO AdminMonitors VALUES
+    (31, 21, 131),
+    (71, 51, 151);
+
+INSERT INTO ContainsItem VALUES
+    (61, 71),
+    (51, 151),
+    (41, 201),
+    (61, 291),
+    (41, 361),
+    (51, 451),
+    (31, 671),
+    (21, 821),
+    (51, 851),
+    (21, 861);
+
+INSERT INTO ProviderGoesTo VALUES
+    (101, 1),
+    (141, 11),
+    (111, 21),
+    (121, 21),
+    (131, 31),
+    (151, 51);
